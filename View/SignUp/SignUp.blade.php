@@ -34,7 +34,7 @@
                     </div>
                     <div class="forms required">
                         <label for="inputMobile">휴대폰 번호</label>
-                        <input type="tel" class="form-control" id="inputMobile" placeholder="휴대폰번호를 입력해 주세요"required>
+                        <input type="tel" class="form-control" name="inputMobile" id="inputMobile" placeholder="휴대폰번호를 입력해 주세요"required>
                     </div>
 
                     <div class="form-group text-center">

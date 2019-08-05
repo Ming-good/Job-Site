@@ -1,7 +1,7 @@
 <?php 
 namespace Ming\lib;
 use duncan3dc\Laravel\BladeInstance;
-class helper
+class blade
 {
 	public static $obj;
 	public function redirect($url)

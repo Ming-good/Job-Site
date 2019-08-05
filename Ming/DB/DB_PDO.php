@@ -3,7 +3,7 @@ namespace Ming\DB;
 use \PDO;
 trait DB_PDO
 {
-        public function PDO()
+        public function connect()
         {
                 try
                 {

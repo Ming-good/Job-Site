@@ -5,6 +5,7 @@ function autoloader($path)
 {
 	$path = str_replace('\\','/',$path);
 	$path = $path.'.php';
+	require_once 'helper/helper.php';
 	require_once $path;
 }
 spl_autoload_register('autoloader');

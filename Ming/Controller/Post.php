@@ -1,48 +1,49 @@
 <?php
 namespace Ming\Controller;
+
 use Ming\DB\DBController as DB;
-use Ming\lib\helper;
-use Ming\lib\Validator;;
+use Ming\lib\blade;
+use Ming\lib\Validator;
+
 class Post
 {
 	public function index()
 	{
 
-		$db = DB::PDO();
-
-		helper:: view('index');
+		$db = DB::Connect();
+		blade:: view('index');
 	}
 
 	public function store()
 	{
-		if($_SERVER["REQUEST_METHOD"] == "POST")
-		{
-			
-			$Name = $_POST['inputName'];
-			$Email = $_POST['inputEmail'];
-			$ID = $_POST['inputID'];
-			$Password = $_POST['inputPassword'];
-			$PasswordCheck = $_POST['inputPasswordCheck'];
-			$Birthday = $_POST['inputBirthday'];
-			$Mobile = $_POST['inputMobile'];
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {	
+			$name = $_POST['inputName'];
+			$email = $_POST['inputEmail'];
+			$id = $_POST['inputID'];
+			$password = $_POST['inputPassword'];
+			$passwordCheck = $_POST['inputPasswordCheck'];
+			$birthday = $_POST['inputBirthday'];
+			$mobile = $_POST['inputMobile'];
 
-			$data=[];
-			array_push($data, $Name, $Email, $ID, $Password, $PasswordCheck, $Birthday, $Mobile);
+			$data = compact( 'name', 'email', 'id', 'password', 'passwordCheck', 'birthday', 'mobile');
 			
 		}
-		Validator::required($data);
-		helper::redirect('home');
+		if (Validator::required($data) && Validator::passwdCheck($data) && Validator:: emailCheck($data) && Validator:: idCheck($data)) {
+			return redirect('home');
+		} else {
+			return redirect('Sign-up');
+		}
 
 	}
 
 	public function create()
 	{
 		
-		helper:: view('SignUp/SignUp');
+		blade:: view('SignUp/SignUp');
 
 	}
 
-	public function Update()
+	public function update()
 	{
 		
 	}

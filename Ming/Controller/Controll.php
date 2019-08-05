@@ -2,10 +2,10 @@
 namespace Ming\Controller;
 class Controll
 {
-	public function Command($url, array $separation)
+	public function command($url, array $separation)
 	{
 		//URL검사를 한 후  해당 컨트롤러의 함수로 보내줌
-		$Bool = $this -> Url_Check($url);
+		$Bool = $this -> urlCheck($url);
 		if($Bool)
 		{
 			$func = $separation[1];
@@ -19,7 +19,7 @@ class Controll
 	}
 
 	//GET으로 입력받은 URL과 Route의 wep.php에서 입력한 URL간에 검사 위한 함수
-	public function Url_Check($url)
+	public function urlCheck($url)
 	{
 		if($url == $_GET['url'])
 		{
