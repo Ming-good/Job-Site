@@ -4,6 +4,12 @@
 function autoloader($path)
 {
 	$path = str_replace('\\','/',$path);
+	$paths = explode('/', $path);
+	
+	if ($paths[0] == 'Ming') {
+		$path = str_replace('Ming', 'services', $path);
+	}
+
 	$path = $path.'.php';
 	require_once 'helper/helper.php';
 	require_once $path;

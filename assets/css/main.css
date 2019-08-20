@@ -1,3 +1,82 @@
+.filebox label { 
+display: inline-block; 
+padding: .5em .75em; 
+color: #fff; 
+font-size: inherit; 
+line-height: normal; 
+vertical-align: middle; 
+background-color: #2e6da4; 
+cursor: pointer; 
+border: 1px solid #ebebeb; 
+border-bottom-color: #e2e2e2; 
+border-radius: .25em; 
+} 
+
+.filebox input[type="file"] { /* 파일 필드 숨기기 */ 
+position: absolute; 
+width: 1px; 
+height: 1px; 
+padding: 0; 
+margin: -1px; 
+overflow: hidden; 
+clip:rect(0,0,0,0); 
+border: 0; 
+}
+
+
+.wrap_Announce{
+    float: left; 
+    margin-right: 20px;
+    position: relative;
+    margin-top: 11px;
+    width: 748px;
+    height: 360px;
+}
+
+.menu li{
+    display: table-cell;
+    text-align: center;
+    padding-top: 10px;
+    border-right:1px solid #ebebeb;
+
+}
+.menu {
+    display: table;
+    margin-top: -1px;
+    border-top: 1px solid #ebebeb;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 364px;
+    height: 40px;
+    margin: 0;
+
+    padding-left: 0px;
+
+}
+
+.my_info {
+    display: block;
+    position: relative;
+    margin-top: 8px;    
+    font-size: 12px;
+}
+
+.btn_logout {
+    background-color: #eaeaea;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 4px 0 5px;
+    width: 60px;
+    height: 26px;
+    border: 1px solid #dcdcdc;
+    color: #444;
+    font-size: 11px;
+    letter-spacing: -1px;
+    line-height: 11px;
+}
+
 .forms.required:before {
     content:"*";
     color:red; 
@@ -62,16 +141,24 @@
     font-size: 13px;
     background: transparent;
 }
+.wrap_contant {
+
+    display:block;
+    width:1200px;
+    margin:0 auto;
+    position:relative;
+}
 .wrap_my {
     overflow: hidden;
     float: left;
     position: relative;
-    margin-top: 34px;
+    margin-top: 11px;
     padding: 20px;
     width: 364px;
     height: 160px;
     border: 1px solid #eaeaea;
     box-sizing: border-box;
+
 }
 @media screen and (max-width: 1680px)
 {
