@@ -50,7 +50,7 @@
                         <button type="submit" id="join-submit" class="btn btn-primary">
                             회원가입<i class="fa fa-check spaceLeft"></i>
                         </button>
-                        <button type="submit" id="cancel" class="btn btn-warning" onclick="history.go(-1);">
+                        <button type="submit" id="cancel" class="btn btn-warning" onclick="javascript:location.href='home'">
                             가입취소<i class="fa fa-times spaceLeft"></i>
                         </button>
                     </div>

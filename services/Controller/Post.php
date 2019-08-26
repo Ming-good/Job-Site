@@ -5,11 +5,14 @@ use Ming\lib\Blade;
 use Ming\lib\Validator;
 use Ming\DB\DBController as DB;
 
+
 class Post
 {
 	#메인 뷰로 이동 함수
 	public function index()
 	{
+
+
 		session_start();
 		if (isset($_SESSION['token'])) {
 			$token = $_SESSION['token'];

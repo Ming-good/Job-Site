@@ -1,7 +1,7 @@
 <?php
 function redirect($url)
 {
-        header('Location:'.$url);
+        header('Location:/Job-Site/'.$url);
 }
 
 function upload($uploadDir, array $inputName)

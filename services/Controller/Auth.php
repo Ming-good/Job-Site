@@ -11,7 +11,7 @@ class Auth
                 $id = $_POST['id'];
                 $pw = $_POST['passwd'];
                 DB::login($id, $pw);
-                return redirect('../home');
+                return redirect('home');
 
         }
 
@@ -19,7 +19,7 @@ class Auth
 	{
 		session_start();	
 		session_destroy();
-		return redirect('../home');
+		return redirect('home');
 	}
 
 	

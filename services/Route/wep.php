@@ -9,6 +9,10 @@ Routing:: Route('home', 'Post@index');
 Routing:: Route('Sign-up', 'Post@create');
 #채용공고 등록 뷰
 Routing:: Route('jobOpening', 'Enterprise@create');
+#채용공고 리스트 뷰
+Routing:: Route('list-g', 'Enterprise@index');
+#채용공고 게시판 뷰
+Routing:: Route('list-g/board', 'Enterprise@show');
 
 
 

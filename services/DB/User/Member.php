@@ -5,10 +5,10 @@ use Ming\DB\DBController as DB;
 
 trait Member
 {
-#-------회원가입
+	#회원가입
 	public function storeUser(array $data)
 	{
-#-----------------------패스워드 해시
+		#패스워드 해시
 		$pwHash = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 $db = DB::Connect();
@@ -19,12 +19,12 @@ trait Member
                 $stmt -> bindValue(':u_pw', $pwHash);
                 $stmt -> bindValue(':email', $data['email']);
                 $stmt -> bindValue(':birthday', $data['birthday']);
-                $stmt -> bindValue(':mobile', $data['mobile']);
+		$stmt -> bindValue(':mobile', $data['mobile']);
 		$stmt -> bindValue(':authority', $data['authority']);
                 $stmt -> execute();		
 	}
 
-#-------로그인
+	#로그인
 	public function login($id, $pw)
 	{
                 $db = DB::Connect();
@@ -32,6 +32,10 @@ trait Member
                 $stmt -> bindValue(':id', $id);
                 $stmt -> execute();		
 		$userData = $stmt -> fetch();
+
+		if(!$userData) {
+			return redirect('home');	
+		}
 
 		if (password_verify($pw, $userData['u_pw'])) {
 			session_start();

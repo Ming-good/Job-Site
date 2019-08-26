@@ -3,6 +3,7 @@ namespace Ming\DB;
 
 use \PDO;
 use Ming\DB\User\Member;
+use Ming\DB\Enterprise\JobOpening;
 
 class DBController
 {
@@ -20,4 +21,5 @@ class DBController
         }
 
 	use Member;
+	use JobOpening;
 }
