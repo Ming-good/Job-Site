@@ -12,8 +12,8 @@ class Enterprise
 	{
 		session_start();
 		if(isset($_SESSION['token']) && $_SESSION['authority'] = 'e') {
-			#nav변수는 startPage, endPage, currentPage, list를 리턴한다.
-			$nav = Page::list('opening');
+			#pageList헬퍼는 startPage, endPage, currentPage, nextPage 변수와 list 배열을 리턴한다.
+			$nav = pageList('opening' ,'order_id');
 			#nav['list']는 해당 테이블에 모든 레코드 정보가 있다.
 			$data = $nav['list'];
 
@@ -31,37 +31,82 @@ class Enterprise
 		}
 	}
 
-	public function show()
-	{
-		$id = $_GET['id'];
-		$db= DB::Connect();
-		$stmt = $db -> prepare('SELECT * FROM opening WHERE order_id=:id');
-		$stmt2 =  $db -> prepare('SELECT * FROM account_info WHERE u_id=:u_id');
-
-		$stmt->bindValue(':id', $id);
-		$stmt->execute();
-
-		$listData = $stmt->fetch();
-
-		$stmt2->bindValue(':u_id', $listData['u_id']);
-		$stmt2->execute();
-
-		$userData = $stmt2->fetch();
-		Blade:: view('enterprise/jobBoard', compact('listData', 'userData'));
-	}
-	#채용공고 등록 뷰로 이동 함수
+	#채용공고 등록,수정 뷰
 	public function create()
 	{
 		session_start();
-		if(isset($_SESSION['token']) && $_SESSION['authority'] = 'e') {
+		if($_SESSION['authority'] == 'e' && hash_equals($_SESSION['token'], $_POST['_token'])) {
+			$id = $_GET['id'];
+			$data = DB:: boardView($id);
+			$listData = $data['listData'];
+			
+			$mode = 'modify';
+			Blade:: view('enterprise/register', compact('listData', 'mode'));
+		} elseif($_SESSION['authority'] == 'e') {
 			Blade:: view('enterprise/register');
+
 		} else {
 			return redirect('home');
 		}
 
 	}
 
-	#채용공고 데이터처리 함수
+	
+	#채용공고 게시판 수정 처리
+	public function update()
+	{
+		$u_id = $_SESSION['id'];
+                $title = $_POST['inputTitle'];
+                $category1 =  $_POST['category1'];
+                $category2 = $_POST['category2'];
+                $hire = $_POST['radioHire'];
+                $shape = $_POST['radioShape'];
+                $salary = $_POST['selectSalary'];
+                $money = $_POST['inputMoney'];
+                $area = $_POST['selectArea'];
+                $sex = $_POST['radioSex'];
+                $career = $_POST['radioCareer'];
+                $comment = $_POST['comment'];
+                empty($_FILES['userfile']['name']) ? $fileName : $fileName = upload('/var/www/html/Job-Site/assets/upload/', $_FILES['userfile']);
+		$order_id = $_GET['id'];
+		$mapInfo = $_POST['mapInfo'];
+		
+                $data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'order_id', 'mapInfo');
+		DB:: boardUpdate($data);
+		return redirect('list-g');	
+
+	}
+	#채용공고 게시판 삭제 처리
+	public function destroy()
+	{
+		session_start();
+		if(hash_equals($_SESSION['token'], $_POST['_token'])) {
+			$id = $_GET['id'];
+
+			#게시물 정보 삭제
+			DB::boardDestroy($id);
+
+			return redirect('list-g');
+		}
+	}
+
+	#채용공고 게시판 뷰
+	public function show()
+	{
+		$id = $_GET['id'];
+
+		#boardView 함수는 유저데이터와 게시물데이터를 리턴합니다. 
+		$data = DB:: boardView($id);
+		$listData = $data['listData'];
+		$userData = $data['userData'];
+
+		$map = explode('/', $listData['map']);
+
+		
+		Blade:: view('enterprise/jobBoard', compact('listData', 'userData', 'map'));
+	}
+
+	#채용공고 게시판 등록 처리 
 	public function store()
 	{
 		session_start();
@@ -80,11 +125,13 @@ class Enterprise
 		$money = $_POST['inputMoney'];
 		$area = $_POST['selectArea'];
 		$sex = $_POST['radioSex'];
-		echo $career = $_POST['radioCareer'];
-		echo $comment = $_POST['comment'];
+		$career = $_POST['radioCareer'];
+		$comment = $_POST['comment'];
 		$fileName = upload('/var/www/html/Job-Site/assets/upload/', $_FILES['userfile']);
+		$mapInfo = $_POST['mapInfo'];
+
 		
-		$data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName');
+		$data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'mapInfo');
 		
 
 		DB::jobRegister($data);
@@ -92,6 +139,7 @@ class Enterprise
 		redirect('home');
 
 	}
+
 }
 
 

@@ -16,11 +16,14 @@
 </head>
 <body>
     <br>
-@if($check)
+@if($overlap == true && $speCheck == true)
     <b><font size="5" color="gray">사용가능한 아이디 입니다.</font></b>
     <script>window.opener.transform(true);</script>
-@else
+@elseif($overlap == false && $speCheck == true)
     <b><font size="5" color="gray">이미 시용중인 아이디 입니다.</font></b>
+    <script>window.opener.transform(false);</script>
+@else
+    <b><font size="5" color="gray">특수문자 없이 입력해주세요.</font></b>
     <script>window.opener.transform(false);</script>
 @endif
     <br><br>
@@ -28,5 +31,4 @@
     <input type="button" id="cInput" class='btn btn-info btn-xs' value="창닫기" onclick="window.close()">
 </body>
 </html>
-
 

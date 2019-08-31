@@ -4,10 +4,6 @@ use duncan3dc\Laravel\BladeInstance;
 class Blade
 {
 	public static $obj;
-	public function redirect($url)
-	{
-		header('Location:'.$url);
-	}
 
         //view메소드를 받을경우 블레이드 템플릿 함수 render로 값 전달
         public static function __callstatic($method, array $args)

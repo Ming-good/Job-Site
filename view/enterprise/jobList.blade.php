@@ -5,7 +5,7 @@
 	<div class="col-md-offset-1 col-md-10">
 	    <table class="table">
 		<thead>
-		    <caption><h3>채용공고관리</h3> </caption>	
+		    <caption><h3>채용공고관리</h3> <a href="/Job-Site/jobOpening"><input class="btn btn-danger pull-right" type="button" value="채용공고 등록"/></a></caption>	
 		</thead>
 		<tbody>
 			    @foreach($data as $row)
@@ -43,8 +43,14 @@
 		    </tr>
 		    <tr>
 			<td colspan="2">
-			    <input class="btn btn-info btn-xs pull-right" value="삭제" type="button"/>
-			    <input  style="margin-right:10px;"class="btn btn-info btn-xs pull-right" value="수정" type="button"/>
+			    <form action="list-g/del?id={{$row['order_id']}}" method='POST' onsubmit = "return del();">
+			        <input class="btn btn-info btn-xs pull-right" value="삭제" type="submit"/>
+				<input type="hidden" name="_token" value="{{$_SESSION['token']}}"/>
+			    </form>
+			    <form action="jobOpening?id={{$row['order_id']}}" method='POST'>
+			        <input style="margin-right:10px;"class="btn btn-info btn-xs pull-right" value="수정" type="submit"/>
+				<input type="hidden" name="_token" value="{{$_SESSION['token']}}"/>
+			    </form>
 			</td>
 		    </tr>
 			    @endforeach
@@ -73,4 +79,15 @@
 	</div>
     </div>
 </div>
+<script>
+	function del() {
+		var msg='삭제하시겠습니까?';
+		if (confirm(msg)){
+			return true;
+		} else {
+			return false;
+		}	
+	}
+</script>
 @stop
+

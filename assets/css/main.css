@@ -1,3 +1,5 @@
+
+
 .filebox label { 
 display: inline-block; 
 padding: .5em .75em; 
@@ -95,10 +97,10 @@ border: 0;
     margin-left: 10px;
     font-size: 13px;
     font-weight: bold;
+    margin-top:2px;
 }
 .user_finding
 {
-
     margin-left: 10px;
     font-size: 13px;
 }

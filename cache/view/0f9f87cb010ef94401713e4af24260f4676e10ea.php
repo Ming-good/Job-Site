@@ -38,7 +38,7 @@
                     </div>
 
    		    <div class="custom-control custom-radio">
-			<input type="radio" name="inputRadio" id="jb-radio-1" class="custom-control-input" value="e" onclick="addEnterprise();">
+			<input type="radio" name="inputRadio" id="jb-radio-1" class="custom-control-input" value="e" >
 			<label class="custom-control-label" for="jb-radio-1">기업회원</label>
 		    </div>
 		    <div class="custom-control custom-radio">

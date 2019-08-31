@@ -1,5 +1,6 @@
 @extends('layout/layout')
 @section('Content')
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db316ffdfc1b88f64685de057f89dc94&libraries=services"></script>
 <div class="container">
     <div class="row">
 	<div class="col-md-offset-1 col-md-10">
@@ -99,11 +100,17 @@
 			    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;">{{$userData['email']}}</p>
 			</td>
 		    </tr>
+		    @if(!empty($map[0]))
+		        <tr>
+			    <td colspan='2'>
+			        <div id="map" style="width:100%;height:400px;"></div>
+			    </td>
+		        </tr>
+		    @endif
 		</tbody>
 	    </table>
 	</div>
     </div>
-
     <div class="row">
 	<div class="col-md-offset-1 col-md-10">
             <table class="table table-bordered">
@@ -113,7 +120,7 @@
                 <tbody>	
 		    <tr>
 			<td>
-			    <div>
+			    <div style="text-align:center;">
 				<img src="/Job-Site/assets/upload/{{$listData['image']}}" style="max-width: 100%; height: auto;" alt=''/>
 			    </div>
 			    <div style="white-space:pre">{{$listData['comment']}}</div>
@@ -124,4 +131,43 @@
 	</div>
     </div>
 </div>
+<script>
+// 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+var geocoder = new kakao.maps.services.Geocoder();
+var coords = new kakao.maps.LatLng({{$map[1]}}, {{$map[0]}});
+var callback = function(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+                var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + result[0].road_address.address_name + '</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    }
+};
+
+geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+
+//줌기능, 드래그기능 가능여부
+map.setZoomable({{$map[2]}}); 
+map.setDraggable({{$map[3]}});
+
+</script>
 @stop
