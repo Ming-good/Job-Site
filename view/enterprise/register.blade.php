@@ -36,6 +36,12 @@
     	            </thead>
     		    <tbody>
 			<tr>
+			    <th>회사명: </th>
+			    <td>
+				<input value="{{$listData['company']}}" style="width:400px" type="text" class="form-control" id='company' name="company"/>
+			    </td>
+			</tr>
+			<tr>
 			    <th>업종선택: </th>
 			<td>
 			<table>
@@ -202,7 +208,7 @@
 	        </table>
 
                 <input type="submit" value="등록"  class="btn btn-primary pull-right"/>
-                <input type="button" value="글 목록으로" class="btn btn-primary btn-rounded  pull-left" onclick="javascript:location.href='home'"/>
+                <input type="button" value="글 목록으로" class="btn btn-primary btn-rounded  pull-left" onclick="javascript:location.href='/Job-Site/list-g'"/>
 
 
             </form>
@@ -313,6 +319,14 @@ function datasubmit()
                  return false;
 
 	}
+
+	var company = document.getElementById('company');
+        if(company.value=="") {
+                 alert('회사명을 입력해주세요');
+                 form.company.focus();
+                 return false;
+
+        }	
 	//저장될 떄 이미지 태그 제거
 	var img_tag = /<img(.*?)>/gi;
 
@@ -328,7 +342,6 @@ function datasubmit()
 //지도 팝업창
 function mapOpen()
 {
-	var map = document.getElementById('map');
 	//엘리먼트를 생성
 	popup = document.createElement("div");
 	popupContent = document.createElement("div");

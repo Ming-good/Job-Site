@@ -19,6 +19,8 @@ Routing:: Route('list-g/board', 'Enterprise@show');
 Routing:: Route('list-g/modify', 'Enterprise@update');
 #채용공고 지도 뷰
 Routing:: Route('list-g/map', 'API@map');
+#채용정보 검색 뷰
+Routing:: Route('allList', 'Search@index');
 
 
 

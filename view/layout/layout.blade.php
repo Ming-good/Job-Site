@@ -25,13 +25,14 @@
 	 <div class="logo">
 	  <a href="/Job-Site/home" target="_blank"><img src="/Job-Site/assets/image/Ming_logo_blue.png" class="logo" alt="logo" border="3px" width="200px" height="75px" align="left"></a>
  	 </div>
-           <li><a class="link" href="#top">Top</a></li>
+           <li><a class="link" href="allList">채용정보</a></li>
            <li><a class="link" href="#work">Work</a></li>
            <li><a class="link" href="#portfolio">Portfolio</a></li>
            <li><a class="link" href="#contact">Contact</a></li>
           </ul>
         </nav>
 
+@yield('search')
 @yield('Content')
 @yield('SignUp')
 	

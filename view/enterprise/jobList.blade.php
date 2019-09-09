@@ -8,10 +8,24 @@
 		    <caption><h3>채용공고관리</h3> <a href="/Job-Site/jobOpening"><input class="btn btn-danger pull-right" type="button" value="채용공고 등록"/></a></caption>	
 		</thead>
 		<tbody>
-			    @foreach($data as $row)
+		 @foreach($data as $row)
 		    <tr>
 			<td>
-			    <h4 style="font-size:16px;letter-spacing:-1.2px;padding-bottom:15px;"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
+			    <table>
+				<tbody>
+				    <tr>
+					<td>
+			    		    <h5 style="letter-spacing:-1.2px;">{{$row['company']}}</h5>
+					</td>
+				    </tr>
+				    <tr>
+					<td>
+			    		    <h4 style="margin-top:0px;font-size:16px;letter-spacing:-1.2px;padding-bottom:15px;"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
+
+					</td>
+				    </tr>
+				</tbody>
+			    </table>
 			    <table>
 				<tbody style="line-height:10px">
 				    <tr>
@@ -38,6 +52,7 @@
 			<td style="width:175px;border:1px solid #dfdfdf;border-right:0 none;">
 			    <div style="padding:40px 30px;line-height:24px;">
 			        <p style="font-size:13px;color:#666;letter-spacing:-1.2px;">등록일 : {{$row['created']}}</p>
+			        <p style="font-size:13px;color:#666;letter-spacing:-1.2px;">수정일 : {{$row['modify']}}</p>
 			    </div>
 			</td>
 		    </tr>

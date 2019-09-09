@@ -12,15 +12,26 @@ class Enterprise
 	{
 		session_start();
 		if(isset($_SESSION['token']) && $_SESSION['authority'] = 'e') {
-			#pageList헬퍼는 startPage, endPage, currentPage, nextPage 변수와 list 배열을 리턴한다.
-			$nav = pageList('opening' ,'order_id');
-			#nav['list']는 해당 테이블에 모든 레코드 정보가 있다.
-			$data = $nav['list'];
+			#pageList헬퍼는 startPage, endPage, currentPage, nextPage 변수을 리턴한다.
+			#pageList에 사용되는 파라미터는 사용할 레코드 갯수 입니다. 
+			$db = DB::Connect();
+			$sql = "SELECT count(*) FROM opening";
+       			$stmt = $db->prepare($sql);
+       			$stmt->execute();
+       			$count = $stmt->fetchColumn();
+
+			$nav = pageList($count);
+
+			$stmt = $db -> prepare('SELECT * FROM opening ORDER BY order_id desc LIMIT '.($nav['currentPage']*5).', 5');
+			$stmt->execute();
+			$data = $stmt->fetchAll();
 
 			$i = 0;
 			foreach($data as $row) {
-				$year = explode(' ', $data[$i]['created']);
-				$data[$i]['created'] = $year[0];
+				$created = explode(' ', $data[$i]['created']);
+				$modify = explode(' ', $data[$i]['modify']);
+				$data[$i]['created'] = $created[0];
+				$data[$i]['modify'] = $modify[0];
 				$i++;
 			}
 
@@ -70,8 +81,9 @@ class Enterprise
                 empty($_FILES['userfile']['name']) ? $fileName : $fileName = upload('/var/www/html/Job-Site/assets/upload/', $_FILES['userfile']);
 		$order_id = $_GET['id'];
 		$mapInfo = $_POST['mapInfo'];
+		$company = $_POST['company'];
 		
-                $data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'order_id', 'mapInfo');
+                $data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'order_id', 'mapInfo', 'company');
 		DB:: boardUpdate($data);
 		return redirect('list-g');	
 
@@ -129,9 +141,10 @@ class Enterprise
 		$comment = $_POST['comment'];
 		$fileName = upload('/var/www/html/Job-Site/assets/upload/', $_FILES['userfile']);
 		$mapInfo = $_POST['mapInfo'];
+		$company = $_POST['company'];
 
 		
-		$data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'mapInfo');
+		$data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'mapInfo', 'company');
 		
 
 		DB::jobRegister($data);

@@ -5,11 +5,12 @@ use Ming\DB\DBController as DB;
 
 trait JobOpening
 {
+	#채용공고 등록
 	public function jobRegister(array $data)
 	{	
 
 		$db = DB::Connect();
-		$sql = "INSERT INTO opening (u_id, title, job1, job2, hiring, shape, salary, money, area, sex, career, image, comment, created, map) VALUES(:u_id, :title, :category1, :category2, :hire, :shape, :salary, :money, :area, :sex, :career, :fileName, :comment, now(), :map)";
+		$sql = "INSERT INTO opening (u_id, title, job1, job2, hiring, shape, salary, money, area, sex, career, image, comment, created, map, company) VALUES(:u_id, :title, :category1, :category2, :hire, :shape, :salary, :money, :area, :sex, :career, :fileName, :comment, now(), :map, :company)";
 
 		$stmt = $db -> prepare($sql);
 		$stmt -> bindValue(':u_id', $data['u_id']);
@@ -26,10 +27,12 @@ trait JobOpening
 		$stmt -> bindValue(':fileName', $data['fileName']);
 		$stmt -> bindValue(':comment', $data['comment']);
 		$stmt -> bindValue(':map', $data['mapInfo']);
+		$stmt -> bindValue(':company', $data['company']);
 		$stmt -> execute();
 
 	}
 
+	#채용공고 수정
 	public function boardUpdate(array $data)
 	{
 		$db = DB::Connect();
@@ -49,7 +52,7 @@ trait JobOpening
 
 
 
-		$sql2 = "UPDATE opening SET title=:title, job1=:category1, job2=:category2, hiring=:hire, shape=:shape, salary=:salary, money=:money, area=:area, sex=:sex, career=:career, image=:fileName, comment=:comment, modify=now(), map=:map WHERE order_id=:order_id";
+		$sql2 = "UPDATE opening SET title=:title, job1=:category1, job2=:category2, hiring=:hire, shape=:shape, salary=:salary, money=:money, area=:area, sex=:sex, career=:career, image=:fileName, comment=:comment, modify=now(), map=:map, company=:company WHERE order_id=:order_id";
 
                 $stmt2 = $db -> prepare($sql2);
                 $stmt2 -> bindValue(':title', $data['title']);
@@ -66,11 +69,12 @@ trait JobOpening
                 $stmt2 -> bindValue(':comment', $data['comment']);
 		$stmt2 -> bindValue(':order_id', $data['order_id']);
 		$stmt2 -> bindValue(':map', $data['mapInfo']);
+		$stmt2 -> bindValue(':company', $data['company']);
 		$stmt2 -> execute();
 
 	}
 
-	#해당 게시판에 필요한 정보를 가져옵니다.
+	#해당 채용공고에 필요한 정보를 가져옵니다.
 	public function boardView($id)
 	{
                 $db= DB::Connect();
@@ -91,7 +95,7 @@ trait JobOpening
 
 	}
 
-	#해당 게시판을 삭제합니다.
+	#해당 채용공고를 삭제합니다.
 	public function boardDestroy($id)
 	{
 		$db = DB::Connect();
@@ -108,6 +112,19 @@ trait JobOpening
         	$stmt2 = $db -> prepare($sql2);
 		$stmt2 -> bindValue(':id', $id);
         	$stmt2 -> execute();
+	}
+
+
+	public function indexMenu()
+	{
+		$db = DB::Connect();
+
+		$sql = "SELECT * FROM opening ORDER BY order_id DESC LIMIT 0,6";
+		$stmt = $db -> prepare($sql);
+		$stmt->execute();
+
+		$data = $stmt -> fetchAll();
+		return $data;
 	}
 
 

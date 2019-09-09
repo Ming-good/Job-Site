@@ -1,6 +1,5 @@
 <?php
 
-
 function autoloader($path)
 {
 	$path = str_replace('\\','/',$path);

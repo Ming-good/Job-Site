@@ -10,7 +10,19 @@
 		<tbody>
 		    <tr>
 			<td style="padding:0 30px 10px 30px;border-top: 2px solid #333">
-			<h2 style="font-weight:bold;border-bottom: 1px solid #dfdfdf; color:#393f6d; padding:10px 0 30px; letter-spacing: -1.2px;"><?php echo e($listData['title']); ?></h2>
+			<table>
+			    <tbody>
+				<tr>
+				    <td>
+					<h4 style="padding:10px 0 0px;color:#6c6c6c;"><?php echo e($listData['company']); ?></h4>
+				    </td>
+				</tr>
+				<tr>
+				    <td>
+					<h2 style="margin-top:0px;font-weight:bold;border-bottom: 1px solid #dfdfdf; color:#393f6d; padding:0px 0 30px; letter-spacing: -1.2px;"><?php echo e($listData['title']); ?></h2>
+				    </td>
+				</tr>
+			    </tbody>
 			    <table>
 				<tbody>
 				    <tr>
@@ -119,7 +131,7 @@
                 <tbody>	
 		    <tr>
 			<td>
-			    <div style="text-align:center;">
+			    <div style="text-align:center;" id='image'>
 				<img src="/Job-Site/assets/upload/<?php echo e($listData['image']); ?>" style="max-width: 100%; height: auto;" alt=''/>
 			    </div>
 			    <div style="white-space:pre"><?php echo e($listData['comment']); ?></div>
@@ -129,6 +141,8 @@
 	    </table>
 	</div>
     </div>
+</div>
+<div id="test">
 </div>
 <script>
 // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다

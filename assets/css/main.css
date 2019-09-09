@@ -1,4 +1,25 @@
+.menuList2:hover {
+border:1px solid #4876ef;
+}
 
+
+.menuList2 {
+width:75px; 
+height:75px;
+float:left;
+text-align:center;
+line-height: 70px;
+border: 1px solid #ddd;
+}
+
+.menuList {
+height:100px;
+overflow:hidden;
+text-overflow:ellipsis;
+width:187.5px;
+border-bottom:1px solid #ddd;
+float:left;
+}
 
 .filebox label { 
 display: inline-block; 

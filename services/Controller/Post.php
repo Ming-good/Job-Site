@@ -12,6 +12,9 @@ class Post
 	public function index()
 	{
 
+		$data = DB::indexMenu();
+		
+
 		session_start();
 		if (isset($_SESSION['token'])) {
 			$token = $_SESSION['token'];
@@ -19,10 +22,10 @@ class Post
 			$name = $_SESSION['name'];
 			$authority = $_SESSION['authority'];
 			
-			Blade:: view('index', compact('token', 'email', 'name', 'authority'));
+			Blade:: view('index', compact('data', 'token', 'email', 'name', 'authority'));
 		} else {
 
-			Blade:: view('index');
+			Blade:: view('index', compact('data'));
 		}
 
 	}
