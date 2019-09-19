@@ -1,28 +1,6 @@
 <?php $__env->startSection('Content'); ?>
-<style>
- #popup{
-        position: fixed; 
-        left: 0;
-        top: 0;
-        width: 100%; 
-        height: 100%; 
-        background-color: rgba(0,0,0,0.4); 
-
- }
- #popupContent{
-	margin: 13% auto; 
-        padding: 20px;
-        width: 50%;
- }
-
- #view {
-	width : 700px;
-	height : 600px;
- }
-
-</style>
 <div class="container">
-    <div class="row">
+    <div class="wrap_board">
 	<div class="col-sm-offset-2 col-sm-8">
 	    <h2>채용공고</h2>
         	<form name="form" action="<?php echo e($mode=='modify' ? 'list-g/modify?id='.$_GET['id'] : 'jobOpening/register'); ?>" method="post" encType="multipart/form-data" onsubmit = "return datasubmit();">
@@ -35,25 +13,19 @@
     	            </thead>
     		    <tbody>
 			<tr>
-			    <th>회사명: </th>
-			    <td>
-				<input value="<?php echo e($listData['company']); ?>" style="width:400px" type="text" class="form-control" id='company' name="company"/>
-			    </td>
-			</tr>
-			<tr>
-			    <th>업종선택: </th>
+			    <th style="width:80px;">업종선택: </th>
 			<td>
 			<table>
 			    <tbody>
 			       <tr>
-			           <td style="width:200px;">
+			           <td>
 				       <select id='job1' class="form-control" value="IT정보통신"  name="category1" onchange="setCategory()">
 				           <option value="">-1차 직종선택-</option>
 				           <option value="IT정보통신" <?php echo e($listData['job1']=="IT정보통신" ? 'selected' : ''); ?>>IT정보통신</option>
 				           <option value="전문직,특수직" <?php echo e($listData['job1']=="전문직,특수직" ? 'selected' : ''); ?>>전문직,특수직</option>
 				       </select>
 			          </td>
-			          <td style="width:200px;">
+			          <td>
 				      <select id='job2' class="form-control"  name="category2">
 				          <option value="">-2차 직종선택-</option>
 				      </select>
@@ -64,7 +36,7 @@
 			   <td>
 			</tr>
 			<tr>
-			    <th>고용형태:</th>
+			    <th style="width:80px;">고용형태:</th>
 			    <td>
                 		<input type="radio" name="radioHire" id="radio-1" class="custom-control-input" checked value="정규직">
                 		<label class="custom-control-label" for="radio-1">정규직&nbsp;&nbsp;&nbsp;</label>
@@ -75,7 +47,7 @@
 			    </td>
 			</tr>
             		<tr>
-			    <th>기업형태:</th>
+			    <th style="width:80px;">기업형태:</th>
 	    		    <td>
                 		<input type="radio" name="radioShape" id="shape-1" class="custom-control-input" checked value="대기업">
                 		<label class="custom-control-label" for="shape-1">대기업&nbsp;&nbsp;&nbsp;</label>
@@ -90,7 +62,7 @@
 	    		    </td>
             		</tr>
 			<tr>
-			    <th>급여:</th>
+			    <th style="width:80px;">급여:</th>
 			    <td>
                                 <table>
 			           <tbody>
@@ -118,7 +90,7 @@
 			    </td>
 			</tr>
 			<tr>
-			    <th>근무지역:</th>
+			    <th style="width:80px;">근무지역:</th>
 			    <td>
                             <table>
                                <tbody>
@@ -319,13 +291,6 @@ function datasubmit()
 
 	}
 
-	var company = document.getElementById('company');
-        if(company.value=="") {
-                 alert('회사명을 입력해주세요');
-                 form.company.focus();
-                 return false;
-
-        }	
 	//저장될 떄 이미지 태그 제거
 	var img_tag = /<img(.*?)>/gi;
 

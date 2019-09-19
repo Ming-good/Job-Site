@@ -3,7 +3,6 @@ namespace Ming\Controller;
 
 use Ming\lib\Blade;
 use Ming\DB\DBController as DB;
-use Ming\lib\Pagenav as Page;
 	
 class Enterprise
 {
@@ -11,20 +10,15 @@ class Enterprise
 	public function index()
 	{
 		session_start();
-		if(isset($_SESSION['token']) && $_SESSION['authority'] = 'e') {
-			#pageList헬퍼는 startPage, endPage, currentPage, nextPage 변수을 리턴한다.
-			#pageList에 사용되는 파라미터는 사용할 레코드 갯수 입니다. 
-			$db = DB::Connect();
-			$sql = "SELECT count(*) FROM opening";
-       			$stmt = $db->prepare($sql);
-       			$stmt->execute();
-       			$count = $stmt->fetchColumn();
-
-			$nav = pageList($count);
-
-			$stmt = $db -> prepare('SELECT * FROM opening ORDER BY order_id desc LIMIT '.($nav['currentPage']*5).', 5');
-			$stmt->execute();
-			$data = $stmt->fetchAll();
+		if(isset($_SESSION['token']) && $_SESSION['authority'] == 'e') {
+			$userID = $_SESSION['id'];
+			$no = $_GET['id'];
+			#해당 유저ID가 등록한 채용공고 정보를 가져옵니다. (해당 함수는 JobOpening모델에 있습니다.)			
+			$arr = DB::boardManagement($userID, $no); 
+			$userData = DB::profile($userID);
+		
+			$data = $arr['data'];
+			$nav = $arr['nav'];
 
 			$i = 0;
 			foreach($data as $row) {
@@ -36,7 +30,7 @@ class Enterprise
 			}
 
 
-			Blade:: view('enterprise/jobList', compact('data', 'nav'));
+			Blade:: view('enterprise/jobList', compact('data', 'nav', 'userData'));
 		} else {
 			return redirect('home');
 		}
@@ -48,6 +42,8 @@ class Enterprise
 		session_start();
 		if($_SESSION['authority'] == 'e' && hash_equals($_SESSION['token'], $_POST['_token'])) {
 			$id = $_GET['id'];
+
+			#채용공고 수정시에 바뀌기 이전 정보를 유지하기 위해 해당 유저의 채용공고 정보를 가져옵니다.(해당 함수는 JobOpening모델에 있습니다.) 
 			$data = DB:: boardView($id);
 			$listData = $data['listData'];
 			
@@ -84,6 +80,7 @@ class Enterprise
 		$company = $_POST['company'];
 		
                 $data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'order_id', 'mapInfo', 'company');
+		#채용공고 정보를 업데이트 합니다.(해당 함수는 JobOpening모델에 있습니다.)
 		DB:: boardUpdate($data);
 		return redirect('list-g');	
 
@@ -95,7 +92,7 @@ class Enterprise
 		if(hash_equals($_SESSION['token'], $_POST['_token'])) {
 			$id = $_GET['id'];
 
-			#게시물 정보 삭제
+			#게시물 정보 삭제(해당 함수는 JobOpening모델에 있습니다.)
 			DB::boardDestroy($id);
 
 			return redirect('list-g');
@@ -107,7 +104,7 @@ class Enterprise
 	{
 		$id = $_GET['id'];
 
-		#boardView 함수는 유저데이터와 게시물데이터를 리턴합니다. 
+		#boardView 함수는 유저데이터와 채용공고 데이터를 리턴합니다. (해당 함수는 JobOpening모델에 있습니다.)
 		$data = DB:: boardView($id);
 		$listData = $data['listData'];
 		$userData = $data['userData'];
@@ -141,12 +138,12 @@ class Enterprise
 		$comment = $_POST['comment'];
 		$fileName = upload('/var/www/html/Job-Site/assets/upload/', $_FILES['userfile']);
 		$mapInfo = $_POST['mapInfo'];
-		$company = $_POST['company'];
+		$company = $_SESSION['company'];
 
 		
 		$data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'mapInfo', 'company');
 		
-
+		#위의 데이터를 받아와 데이터베이스에 등록합니다 (해당 함수는 JobOpening모델에 있습니다.)
 		DB::jobRegister($data);
 
 		redirect('home');

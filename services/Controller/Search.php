@@ -9,16 +9,13 @@ class Search
 {
 	public function index()
 	{
+		session_start();
 
-		#쿼리문을 담을 변수들
-		$select = array('WHERE ', 'AND ');
+
 		#쿼리문에 속성명
 		$column = array();
 		#데이터베이스에 저장할 값
 		$values = array();
-		$where = '';
-
-		$j = 0;
 		#검색어
 		$keyword = $_GET['inputKeyword'];
 		
@@ -37,32 +34,13 @@ class Search
 			array_push($column, 'sex=? ');
 			array_push($values, $_GET['selectSex']);
 		}
-
-		#배열 개수를 세어 get값이 2개 이상일 경우 쿼리문에 WHERE과 AND를 추가 
-		#만약 1개일경우 WHERE만 추가
-		for($i=0; $i<count($values); $i++) {
-			$where = $where.$select[$j].$column[$i];
-			$i==0 ? $j++ : $j;
-		}
-
-                $db = DB::Connect();
-		$sql = "SELECT * FROM opening ".$where."ORDER BY order_id DESC ";
-                $stmt = $db->prepare($sql);
-
-		for($i=0; $i<count($values); $i++) {
-			$stmt -> bindValue($i+1, $values[$i]);
-		}
-		$stmt->execute();
-		$data = $stmt -> fetchAll();
-
-		#검색 헬퍼함수를 이용하여 자료를 검색
-		$searchKey = search($keyword, $data);
-		$count = count($searchKey);
-
-		#배열내의 배열값 개수를 카운트하여 페이지네이션 함수로 값을 보냄
-                $nav = pageList($count);
-		$data = array_splice($searchKey, $nav['currentPage']*5, 5);
 		
+		#위의 조건들에 맞는 정보를 검색합니다. (해당함수는 Search모델에 존재) 
+		$arr = DB::detail($column, $values, $keyword, $_GET['id']);	
+
+		$data = $arr['data'];
+		$nav = $arr['nav'];
+
                 $i = 0;
                 foreach($data as $row) {
                         $created = explode(' ', $data[$i]['created']);
@@ -73,7 +51,7 @@ class Search
 		}
  
 		$addr = 'allList'; 
-		Blade::view('search/search', compact('data', 'keyword', 'nav', 'addr', 'values'));
+		Blade::view('search/search', compact('data', 'keyword', 'nav', 'addr'));
 	}
 
 }

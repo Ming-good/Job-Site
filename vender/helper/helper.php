@@ -35,14 +35,14 @@ function upload($uploadDir, array $inputName)
 }
 
 #페이지 네비게이션
-function pageList($count)
+function pageList($count, $no)
 {
 
        $page = 5;
        $morePage = 5;
 
        #현재 페이지
-       $currentPage = $_GET['id'] ? $_GET['id'] : 0;
+       $currentPage = empty($no) ? $no = 0 : $no;
        #페이지블럭 카운터
        $nowBlock = floor($currentPage/$page);
 	 
@@ -69,7 +69,7 @@ function search($search, $searchData)
 {
 	#양쪽에 공백이 있을경우 제거합니다.
 	$search = trim($search);
-        #만약 키워드가 빈 값이면 쓸모없어진 과정을 생략하고 모든 레코드를 검색합니다.        
+        #만약 키워드가 빈 값이면 쓸모없어진 과정을 생략하고 searchData를 그대로 반환합니다.        
 	if(!empty($search)) {
                 $search = explode(' ', $search);
 
@@ -109,8 +109,9 @@ function search($search, $searchData)
 				
                         }
 		}else {
-			#띄어쓰기가 있는 검색어 일 경우 false는 효율적인 검색을 위해 데이터베이스의 검색키워드끼리 길이와 위치를
-			#비교하여 배열에 저장하고 true일경우 변화없이 배열에 저장합니다. 
+			#띄어쓰기가 있는 검색어 일 경우 
+			#false를 가진 checkData배열은 효율적인 검색을 위해 데이터베이스의 검색키워드끼리 길이와 위치를비교하여 result배열에 저장하고 
+			#true를 가진 checkData배열은 그대로 result배열에 저장합니다. 
                         $i = 0;
                         foreach($checkData as $row) {
                                 if($row[1] == false) {
@@ -125,7 +126,7 @@ function search($search, $searchData)
                                         }
                                         $row[0] = $temp;
                                         array_push($result, $row);
-				  #true가있는 배열은 변화 없이 배열에 저장합니다.
+				  #해당 배열이 true가 아니며 result배열에 이미 존재하는 값이면 안된다.
                                 } elseif($row[1] == true && !in_array($row, $result)) {
                                         array_push($result, $row);
                                 }

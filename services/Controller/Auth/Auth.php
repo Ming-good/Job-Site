@@ -1,5 +1,5 @@
 <?php
-namespace Ming\Controller;
+namespace Ming\Controller\Auth;
 
 use Ming\DB\DBController as DB;
 use Ming\lib\Validator;
@@ -7,6 +7,18 @@ use Ming\lib\Blade;
 
 class Auth
 {
+	#로그인 뷰
+	public function index()
+	{
+		session_start();
+		if(isset($_SESSION['token'])) {
+			return redirect('home');
+		} else {
+			Blade::view('login');
+		}
+	}
+
+	#카카오 로그인과 동시에 개인 회원가입
 	public function loginKakao()
 	{
 		$ID = $_POST['inputID'];
@@ -20,7 +32,9 @@ class Auth
 		$bool = Validator:: idCheck($ID);
 		
 		if($bool == true) {
+			#카카오 회원가입을 위한 함수(해당 함수는 Member모델에 있습니다)
 			DB::storeKakao($data);	
+			#카카오 로그인을 위한 함수(해당 함수는 Member모델에 있습니다.)
 			DB::loginKakao($ID);
 			return redirect('home');
 		} else {
@@ -30,15 +44,20 @@ class Auth
 
 		
 	}
+	#로그인 유효성 검사
         public function login()
         {
                 $id = $_POST['id'];
-                $pw = $_POST['passwd'];
-                DB::login($id, $pw);
-                return redirect('home');
+		$pw = $_POST['passwd'];
+		#로그인 함수 (해당 함수는 Member모델에 있습니다.)
+                $bool = DB::login($id, $pw);
+		if($bool == false) {
+                    return redirect('login');
+		}
 
         }
 
+	#로그아웃. 세션제거
 	public function logout()
 	{
 		session_start();	

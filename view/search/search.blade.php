@@ -8,7 +8,7 @@
             <h3><span style="font-weight:bold;">채용공고 상세검색</span></h3>
 	    <div style="border-top:2px solid;border-left:1px solid #dfdfdf;border-right:1px solid #dfdfdf;padding:30px 30px 30px 30px;">
 		    <form method="GET" action="allList">
-			<div style="float:left;width:250px;">
+			<div class="selectSpan">
 			    <span style="width:70px; float:left;font-weight:bold;padding-top:5px;">지역선택:</span>
 			    <span style="width:140px;">
 			        <select class="form-control" style="width:140px;"  name="selectArea">
@@ -60,8 +60,8 @@
                         </div>
 			<div style="margin-top:15px;">
 			    <span style="width:70px; float:left;font-weight:bold;padding-top:5px;">검색어:</span>
-                            <input value='{{$keyword}}'  style="float:left;width:300px;" type="search" class="form-control" name="inputKeyword" id="inputKeyword"/>
-                            <input type="submit" class="btn btn-primary" value="검색"/>
+                            <input value='{{$keyword}}'  type="search" class="searchForm small" name="inputKeyword" id="inputKeyword"/>
+                            <input type="submit" class="btn btn-primary" style="margin-top:2px;" value="검색"/>
 			</div>
 		    </form>
 	    </div>
@@ -82,7 +82,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h4 style="margin-top:0px;font-size:16px;letter-spacing:-1.2px;padding-bottom:15px;"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
+                                            <h4 style="margin-top:0px;font-size:16px;letter-spacing:-1.2px;padding-bottom:15px;overflow:hidden;height:32px;"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
 
                                         </td>
                                     </tr>
@@ -111,8 +111,8 @@
                                 </tbody>
                             </table>
                         </td>
-                        <td style="width:175px;border:1px solid #dfdfdf;border-right:0 none;">
-                            <div style="padding:40px 30px;line-height:24px;">
+                        <td class="wrapSize">
+                            <div style="padding:35px 10px 20px 10px;line-height:24px;">
                                 <p style="font-size:13px;color:#666;letter-spacing:-1.2px;">등록일 : {{$row['created']}}</p>
                                 <p style="font-size:13px;color:#666;letter-spacing:-1.2px;">수정일 : {{$row['modify']}}</p>
                             </div>
@@ -125,19 +125,19 @@
 	</div>
     </div>
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
+        <div style="text-align:center;">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="{{$addr}}?inputKeyword={{$keyword}}&id=">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="{{$addr}}?inputKeyword={{$keyword}}&selectArea={{$_GET['selectArea']}}&selectCareer={{$_GET['selectCareer']}}&selectSex={{$_GET['selectSex']}}&id=">Previous</a></li>
                 @for($i=$nav['startPage'];$i<$nav['endPage'];$i++)
                         @if($nav['currentPage']==$i)
                             <li class="page-item"><span class="page-link">{{$i+1}}</span></li>
                         @else
-                            <li class="page-item"><a class="page-link" href="{{$addr}}?inputKeyword={{$keyword}}&id={{$i}}">{{$i+1}}</a></li>
+                            <li class="page-item"><a class="page-link" href="{{$addr}}?inputKeyword={{$keyword}}&selectArea={{$_GET['selectArea']}}&selectCareer={{$_GET['selectCareer']}}&selectSex={{$_GET['selectSex']}}&id={{$i}}">{{$i+1}}</a></li>
                         @endif
                 @endfor
 
                 @if($nav['nextPage']==TRUE)
-                        <li class="page-item"><a class="page-link" href="{{$addr}}?inputKeyword={{$keyword}}&id={{$nav['endPage']}}">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="{{$addr}}?inputKeyword={{$keyword}}&selectArea={{$_GET['selectArea']}}&selectCareer={{$_GET['selectCareer']}}&selectSex={{$_GET['selectSex']}}&id={{$nav['endPage']}}">Next</a></li>
                 @else
                         <li class="page-item"><span class="page-link">Next</span></li>
                 @endif

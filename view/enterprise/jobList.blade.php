@@ -15,12 +15,12 @@
 				<tbody>
 				    <tr>
 					<td>
-			    		    <h5 style="letter-spacing:-1.2px;">{{$row['company']}}</h5>
+			    		    <h5 style="letter-spacing:-1.2px;">{{$userData['company']}}</h5>
 					</td>
 				    </tr>
 				    <tr>
 					<td>
-			    		    <h4 style="margin-top:0px;font-size:16px;letter-spacing:-1.2px;padding-bottom:15px;"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
+			    		    <h4 style="margin-top:0px;font-size:16px;letter-spacing:-1.2px;padding-bottom:15px;overflow:hidden;height:32px;"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
 
 					</td>
 				    </tr>
@@ -49,8 +49,8 @@
 				</tbody>
 			    </table>
 			</td>
-			<td style="width:175px;border:1px solid #dfdfdf;border-right:0 none;">
-			    <div style="padding:40px 30px;line-height:24px;">
+			<td class="wrapSize">
+			    <div style="padding:35px 10px 20px 10px;line-height:24px;">
 			        <p style="font-size:13px;color:#666;letter-spacing:-1.2px;">등록일 : {{$row['created']}}</p>
 			        <p style="font-size:13px;color:#666;letter-spacing:-1.2px;">수정일 : {{$row['modify']}}</p>
 			    </div>
@@ -74,7 +74,7 @@
 	</div>
     </div>
     <div class="row">
-	<div class="col-md-offset-3 col-md-6">
+	<div style="text-align:center;">
 	    <ul class="pagination">
 		<li class="page-item"><a class="page-link" href="list-g?id=">Previous</a></li>
 		@for($i=$nav['startPage'];$i<$nav['endPage'];$i++)

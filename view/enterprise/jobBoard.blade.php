@@ -2,7 +2,7 @@
 @section('Content')
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db316ffdfc1b88f64685de057f89dc94&libraries=services"></script>
 <div class="container">
-    <div class="row">
+    <div class="wrap_board">
 	<div class="col-md-offset-1 col-md-10">
 	    <table class="table table-bordered">
 		<thead>
@@ -36,7 +36,7 @@
                                     		    <tr>
                                         		<th><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;padding-right:30px;">경력</p></th>
                                         		<td>
-                                            		    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;">{{$listData['career']}}</p>
+                                            		    <p class="font2">{{$listData['career']}}</p>
                                         		</td>
                                     		    </tr>
 						    <tr>
@@ -57,19 +57,19 @@
                                                     <tr>
                                                         <th><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;padding-right:30px;">고용형태</p></th>
                                                         <td>
-                                                            <p style="font-size:14px;color:#666;letter-spacing:-1.2px;">{{$listData['hiring']}}</p>
+                                                            <p class="font2">{{$listData['hiring']}}</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;padding-right:30px;">급여조건</p></th>
                                                         <td>
-                                                            <p style="font-size:14px;color:#666;letter-spacing:-1.2px;">{{$listData['salary']}}&nbsp;&nbsp;{{$listData['money']}}</p>
+                                                            <p class="font2">{{$listData['salary']}}&nbsp;&nbsp;{{$listData['money']}}</p>
 							</td>
 						    </tr>
                                                     <tr>
                                                         <th><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;padding-right:30px;">근무지역</p></th>
                                                         <td>
-                                                            <p style="font-size:14px;color:#666;letter-spacing:-1.2px;">{{$listData['area']}}</p>
+                                                            <p class="font2">{{$listData['area']}}</p>
 							</td>
 						    </tr>
 
@@ -95,21 +95,21 @@
                 </thead>
                 <tbody>
                     <tr>
-			<th style="background-color:#f9f9f9;width:100px;"><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;">담당자</p></th>
+			<th style="background-color:#f9f9f9;width:100px;"><p class="font1" >담당자</p></th>
 			<td style="background-color:#ffffff;">
-			    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;">{{$userData['name']}}</p>
+			    <p class="font2">{{$userData['name']}}</p>
 			</td>
 		    </tr>
                     <tr>
-			<th style="background-color:#f9f9f9;width:100px;"><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;">연락처</p></th>
+			<th style="background-color:#f9f9f9;width:100px;"><p class="font1">연락처</p></th>
 			<td style="background-color:#ffffff;">
-			    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;">{{$userData['mobile']}}</p>
+			    <p class="font2">{{$userData['mobile']}}</p>
 			</td>
 		    </tr>
                     <tr>
-			<th style="background-color:#f9f9f9;width:100px;"><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;">이메일</p></th>
+			<th style="background-color:#f9f9f9;width:100px;"><p class="font1">이메일</p></th>
 			<td style="background-color:#ffffff;">
-			    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;">{{$userData['email']}}</p>
+			    <p class="font2">{{$userData['email']}}</p>
 			</td>
 		    </tr>
 		    @if(!empty($map[0]))

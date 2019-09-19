@@ -1,21 +1,32 @@
 @extends('layout/layout')
 @section('SignUp')
-        <article class="container">
-                <div class="page-header"> 
-                    <div class="col-md-6 col-md-offset-3">
-                    <h3>인적사항</h3>
-                    </div>
+        <div class="container">
+	    <div class="wrap_A">
+    	        <ul style=" list-style:none;">
+		    <li ><a class="btnA off" id="A"  style="text-decoration:none;float:left" href="/Job-Site/userSign-up">개인회원</a></li>
+	    	    <li ><a class="btnA on" id="B" style="text-decoration:none;" href='/Job-Site/enterpriseSign-up'>기업회원</a></li>
+	        </ul>
+	    </div>
+            <form name="join" method="POST" onsubmit = "return validator();" action ="enterpriseStore" role="form">
+                <div class="col-md-6 col-md-offset-3">
+                    <h3>기업정보</h3>
                 </div>
-            <div class="col-sm-6 col-md-offset-3">
-                <form name="join" method="POST" onsubmit = "return validator();" action ="SignUpProcess" role="form">
+                <div class="col-sm-6 col-md-offset-3">
                     <div class="forms required">
-                        <label for="inputName">이름</label>
+                        <label for="inputCompany">회사명</label>
+                        <input type="text" class="form-control" name="inputCompany"  id="inputCompany" placeholder="회사명을 입력해 주세요." required>
+                    </div>
+                    <div class="forms required">
+                        <label for="inputName">대표자명</label>
                         <input type="text" class="form-control" name="inputName"  id="inputName" placeholder="이름을 입력해 주세요" required>
                     </div>
-                    <div class="forms required">
-                        <label for="inputBirthday">생년월일</label>
-                        <input type="text" class="form-control" name="inputBirthday"  id="inputBirthday" placeholder="EX)20190804 = 2019년 8월 4일" required>
-                    </div>
+		</div>
+
+                <div class="col-md-6 col-md-offset-3">
+                    <h3>담당자 정보</h3>
+                </div>
+                <div class="col-sm-6 col-md-offset-3">
+
                     <div class="forms required">
                         <label for="inputEmail">이메일 </label>
                         <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="이메일 주소를 입력해주세요" >
@@ -35,17 +46,9 @@
                     </div>
                     <div class="form-group">
                         <label for="inputMobile">휴대폰 번호</label>
-                        <input type="tel" class="form-control" name="inputMobile" id="inputMobile" placeholder="EX)01066877665">
+                        <input maxlength="13" type="tel" class="form-control" name="inputMobile" id="inputMobile" placeholder="EX)010-6687-7665" oninput="mobileCheck();">
                     </div>
 
-   		    <div class="custom-control custom-radio">
-			<input type="radio" name="inputRadio" id="jb-radio-1" class="custom-control-input" value="e" >
-			<label class="custom-control-label" for="jb-radio-1">기업회원</label>
-		    </div>
-		    <div class="custom-control custom-radio">
-			<input type="radio" name="inputRadio" id="jb-radio-2" class="custom-control-input" checked="checked" value="u" onclick="delEnterprise();">
-			<label class="custom-control-label" for="jb-radio-2">개인회원</label>
-		    </div>
 
                     <div class="form-group text-center">
                         <button type="submit" id="join-submit" class="btn btn-primary">
@@ -55,10 +58,10 @@
                             가입취소<i class="fa fa-times spaceLeft"></i>
                         </button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
 
-        </article>
+        </div>
 
 <script>
 
@@ -75,17 +78,24 @@
 	 var checkEmail = /([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(.[0-9a-zA-Z_-]+){1,2}/i;
 
 	 var name = document.getElementById('inputName');
+	 var company = document.getElementById('inputCompany');
 	 var day = document.getElementById('inputBirthday');
 	 var email = document.getElementById('inputEmail');
 	 var pw = document.getElementById('inputPassword');
 	 var id = document.getElementById('ckId');
+
+	 //회사명
+	 if(company.value=="") {
+		 alert('회사명을 입력해주세요');
+		 join.inputCompany.focus();
+		 return false;
+	 }
 
 	 //이름
 	 if(name.value=="") {
 		 alert('이름을 입력해주세요');
 		 join.inputName.focus();
 		 return false;
-
 	 }
 
 	 //생년월일
@@ -164,7 +174,7 @@
 	 var _top = -Math.ceil(( window.screen.width - _height )/2);
 	 
 	 if(idLeng.test(id.value)) {
-		url = 'Sign-up/checkId?id='+id.value;
+		url = 'checkId?id='+id.value;
 		openWin=window.open(url, "chkid", 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top);
 		return true;
 	 } else {
@@ -175,6 +185,22 @@
 	 }
 
  }
+
+function mobileCheck()
+{
+        var check = /(^01[0-9].*)/ig;
+        var mobile = document.getElementById('inputMobile');
+        mobile.addEventListener('keydown', function(event) {
+            if(event.keyCode == 8 && (mobile.value.length==4 || mobile.value.length==9))
+            {
+                     join.inputMobile.value = join.inputMobile.value.replace(/(.*)(-)/, '$1');
+            }
+        });
+
+        if((mobile.value.length==3 || mobile.value.length==8) && check.test(mobile.value)) {
+                join.inputMobile.value = join.inputMobile.value.replace(check, '$1-');
+        }
+}
 
 </script>
 

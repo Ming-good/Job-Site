@@ -1,0 +1,98 @@
+
+input::placeholder {
+color: #999;
+}
+.button3 {
+width:100px;
+height:40px;
+background-color:#4876ef;
+color:#fff;
+border:none;
+font-size:13px;
+font-weight:bold;
+}
+.button2 {
+width:50px;
+height:30px;
+background-color:#4876ef;
+color:#fff;
+border:none;
+font-size:13px;
+font-weight:bold;
+}
+
+.button1 {
+width:240px;
+height:50px;
+background-color:#4876ef;
+color:#fff;
+border:none;
+font-size:16px;
+font-weight:bold;
+}
+
+.inputName {
+padding: 1px 10px 10px 10px;
+border: 1px solid #dfdfdf;
+width:140px;
+height:60px;
+float:left;
+}
+
+.inputBirth {
+margin-left:10px;
+padding: 1px 10px 10px 10px;
+border: 1px solid #dfdfdf;
+width:140px;
+height:60px;
+float:left;
+}
+
+.inputEmail {
+margin-left:10px;
+padding: 1px 10px 10px 10px;
+border: 1px solid #dfdfdf;
+width:220px;
+height:60px;
+float:left;
+}
+
+.inputMobile {
+margin-left:530px;
+padding: 1px 10px 10px 10px;
+border: 1px solid #dfdfdf;
+width:140px;
+height:60px;
+}
+
+.inputSchool {
+margin-left:120px;
+padding: 1px 10px 10px 10px;
+border: 1px solid #dfdfdf;
+width:140px;
+height:60px;
+}
+
+@media screen and (max-width: 763px) {
+.inputName {
+margin:10px 10px 10px 10px;
+float:none;
+}
+
+.inputBirth {
+margin:10px 10px 10px 10px;
+float:none;
+}
+
+.inputEmail {
+margin:10px 10px 10px 10px;
+float:none;
+}
+
+.inputMobile {
+margin:10px 10px 10px 10px;
+float:none;
+}
+
+
+}

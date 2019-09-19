@@ -1,7 +1,7 @@
 <?php $__env->startSection('Content'); ?>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db316ffdfc1b88f64685de057f89dc94&libraries=services"></script>
 <div class="container">
-    <div class="row">
+    <div class="wrap_board">
 	<div class="col-md-offset-1 col-md-10">
 	    <table class="table table-bordered">
 		<thead>
@@ -35,7 +35,7 @@
                                     		    <tr>
                                         		<th><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;padding-right:30px;">경력</p></th>
                                         		<td>
-                                            		    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;"><?php echo e($listData['career']); ?></p>
+                                            		    <p class="font2"><?php echo e($listData['career']); ?></p>
                                         		</td>
                                     		    </tr>
 						    <tr>
@@ -56,19 +56,19 @@
                                                     <tr>
                                                         <th><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;padding-right:30px;">고용형태</p></th>
                                                         <td>
-                                                            <p style="font-size:14px;color:#666;letter-spacing:-1.2px;"><?php echo e($listData['hiring']); ?></p>
+                                                            <p class="font2"><?php echo e($listData['hiring']); ?></p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;padding-right:30px;">급여조건</p></th>
                                                         <td>
-                                                            <p style="font-size:14px;color:#666;letter-spacing:-1.2px;"><?php echo e($listData['salary']); ?>&nbsp;&nbsp;<?php echo e($listData['money']); ?></p>
+                                                            <p class="font2"><?php echo e($listData['salary']); ?>&nbsp;&nbsp;<?php echo e($listData['money']); ?></p>
 							</td>
 						    </tr>
                                                     <tr>
                                                         <th><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;padding-right:30px;">근무지역</p></th>
                                                         <td>
-                                                            <p style="font-size:14px;color:#666;letter-spacing:-1.2px;"><?php echo e($listData['area']); ?></p>
+                                                            <p class="font2"><?php echo e($listData['area']); ?></p>
 							</td>
 						    </tr>
 
@@ -94,21 +94,21 @@
                 </thead>
                 <tbody>
                     <tr>
-			<th style="background-color:#f9f9f9;width:100px;"><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;">담당자</p></th>
+			<th style="background-color:#f9f9f9;width:100px;"><p class="font1" >담당자</p></th>
 			<td style="background-color:#ffffff;">
-			    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;"><?php echo e($userData['name']); ?></p>
+			    <p class="font2"><?php echo e($userData['name']); ?></p>
 			</td>
 		    </tr>
                     <tr>
-			<th style="background-color:#f9f9f9;width:100px;"><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;">연락처</p></th>
+			<th style="background-color:#f9f9f9;width:100px;"><p class="font1">연락처</p></th>
 			<td style="background-color:#ffffff;">
-			    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;"><?php echo e($userData['mobile']); ?></p>
+			    <p class="font2"><?php echo e($userData['mobile']); ?></p>
 			</td>
 		    </tr>
                     <tr>
-			<th style="background-color:#f9f9f9;width:100px;"><p style="font-size:14px;letter-spacing:-1.2px;color:#999999;text-align:left;font-weight:normal;">이메일</p></th>
+			<th style="background-color:#f9f9f9;width:100px;"><p class="font1">이메일</p></th>
 			<td style="background-color:#ffffff;">
-			    <p style="font-size:14px;color:#666;letter-spacing:-1.2px;"><?php echo e($userData['email']); ?></p>
+			    <p class="font2"><?php echo e($userData['email']); ?></p>
 			</td>
 		    </tr>
 		    <?php if(!empty($map[0])): ?>

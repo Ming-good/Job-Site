@@ -5,9 +5,9 @@
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <div class="container">
-    <div class="row" style="margin-top:25px;">
+    <div  class="wrap">
 	<div class="col-sm-8">
-	    <div style="margin-top:12px; width:752px;">
+	    <div class="jobOpening">
 		<table class="table">
 		    <tbody>
 			<tr style="height:45px;">
@@ -15,6 +15,7 @@
 			    <th style="font-size:15px;background-color:#f8f8f8;text-align:center;">지역별 채용정보</th>
 			</tr>
 			<tr style="height:200px;">
+			    <!--최근 채용정보--!>
 			    <td>
 			        <ul style="padding-left:0px;width:375px; list-style:none;">
 					<?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -25,6 +26,7 @@
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			        </ul>
 			    </td>
+			    <!--지역별 채용정보--!>
 			    <td>
 				<ul style="padding-left:0px;width:375px; list-style:none;">
 				    <li class="menuList2">
@@ -106,7 +108,7 @@
 			    <strong><?php echo e($name); ?></strong>님&nbsp;<span style="color:#4876ef;font-size:13px;">(일반회원)</span>
 			</span>
 			<span class="my_info">
-			    <a href="">이력서 등록하기 ></a>
+			    <a href="resume">이력서 등록하기 ></a>
 			</span>
 		        <fieldset>
 		            <button type="submit" class="btn_logout">로그아웃</button>	
@@ -114,9 +116,8 @@
 		    </div>
 		</form>
 		<ul class="menu">
-        	    <li><a href="list-g">채용공고관리</a></li>
+        	    <li><a href="resume/management">이력서 관리</a></li>
         	    <li><a href="">열람기업</a></li>
-        	    <li><a href="">이력서 관리</a></li>
         	    <li><a href="">스마트매치</a></li>
     		</ul>
 	    </div>
@@ -137,7 +138,6 @@
 		</form>
 		<ul class="menu">
         	    <li><a href="list-g">채용공고관리</a></li>
-        	    <li><a href="">스마트매치</a></li>
     		</ul>
 	    </div>
 	</div>
@@ -145,12 +145,10 @@
 
 <?php else: ?>
 <!-- 로그인 -->
-	<div style="width:364px;">
+         <div class="wrap_my">
          <form method="POST" action="Auth/login">
-             <div class="wrap_my">
                  <div >
-                      <a class="user_login" href="Sign-up">회원가입</a>
-                      <a class="user_finding"  href="">아이디/비밀번호 찾기</a>
+                      <a class="user_login" href="userSign-up">회원가입</a>
                  </div>
                  <div class ="login_input">
                      <span class ="box_inp">
@@ -163,14 +161,15 @@
                          <input type="submit" class="btn_login" value="로그인">
                      </span>
                  </div>
-		      <a class="pull-right" style="margin-top:40px;"  href="javascript:loginKakao()"><img src="/Job-Site/assets/image/login.png"/></a>
-             </div>
+		      <a class="pull-right" style="margin-top:10px;"  href="javascript:loginKakao()"><img src="/Job-Site/assets/image/login.png"/></a>
+            
          </form>
 	    
 	</div>
 
 
 <?php endif; ?>
+
 
 	</div>
     </div>

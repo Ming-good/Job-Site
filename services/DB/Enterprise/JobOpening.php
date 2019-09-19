@@ -114,7 +114,7 @@ trait JobOpening
         	$stmt2 -> execute();
 	}
 
-
+	#메인 페이지에 최근채용정보 
 	public function indexMenu()
 	{
 		$db = DB::Connect();
@@ -127,6 +127,26 @@ trait JobOpening
 		return $data;
 	}
 
+	#채용공고를 수정, 삭제 관리합니다.
+	public function boardManagement($userId, $no)
+	{
+                $db = DB::Connect();
+                $sql = "SELECT count(*) FROM opening WHERE u_id=:u_id";
+                $stmt = $db->prepare($sql);
+                $stmt -> bindValue(':u_id', $userId);
+                $stmt->execute();
+                $count = $stmt->fetchColumn();
 
+		#pageList헬퍼는 startPage, endPage, currentPage, nextPage 변수을 리턴한다.
+                #pageList에 사용되는 파라미터는 사용할 레코드 개수와 해당 페이지네이션 번호($_GET['id']) 입니다.
+		$nav = pageList($count, $no);
+
+                $stmt = $db -> prepare('SELECT * FROM opening WHERE u_id=:u_id ORDER BY order_id desc LIMIT '.($nav['currentPage']*5).', 5');
+                $stmt -> bindValue(':u_id', $userId);
+                $stmt->execute();
+                $data = $stmt->fetchAll();
+		
+		return compact('nav', 'data');
+	}
 }
 

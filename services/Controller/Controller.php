@@ -1,6 +1,6 @@
 <?php
 namespace Ming\Controller;
-class Controll
+class Controller
 {
 	public function command($url, array $separation)
 	{
