@@ -6,6 +6,7 @@ use Ming\DB\User\Member;
 use Ming\DB\User\Resume;
 use Ming\DB\Enterprise\JobOpening;
 use Ming\DB\Search\Search;
+use Ming\DB\Apply\Apply;
 
 class DBController
 {
@@ -26,4 +27,5 @@ class DBController
 	use JobOpening;
 	use Search;
 	use Resume;
+	use Apply;
 }

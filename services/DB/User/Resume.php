@@ -58,7 +58,6 @@ trait Resume
 	#이력서 삭제
 	public function resumeDel($no)
 	{
-		echo 'a';
 		$db = DB::Connect();
 		$sql = "DELETE FROm resume WHERE order_id=:no";
 		$stmt = $db -> prepare($sql);

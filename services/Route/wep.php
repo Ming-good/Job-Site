@@ -9,8 +9,6 @@ Routing:: Route('home', 'Auth\Post@index');
 Routing:: Route('userSign-up', 'Auth\Post@userCreate');
 #기업 회원가입 뷰
 Routing:: Route('enterpriseSign-up', 'Auth\Post@enterpriseCreate');
-#아이디 중복 체크 뷰
-Routing:: Route('checkId', 'Auth\Auth@checkId');
 #채용공고 등록 뷰
 Routing:: Route('jobOpening', 'Enterprise@create');
 #채용공고 리스트 뷰
@@ -24,11 +22,13 @@ Routing:: Route('allList', 'Search@index');
 #이력서 등록 뷰
 Routing:: Route('resume', 'User\Resume@create');
 #이력서 관리 뷰
-Routing:: Route('resume/management', 'User\Resume@show');
+Routing:: Route('resume/management', 'User\Resume@index');
 #이력서 뷰
-Routing:: Route('resume/view', 'User\Resume@index');
+Routing:: Route('resume/view', 'User\Resume@show');
 #로그인 뷰
 Routing:: Route('login', 'Auth\Auth@index');
+#지원 받은 이력서 관리
+Routing:: Route('guin_management', 'Apply\Management@index');
 
 
 
@@ -45,7 +45,7 @@ Routing:: Route('Auth/loginKakao', 'Auth\Auth@loginKakao');
 Routing:: Route('jobOpening/register', 'Enterprise@store');
 #채용공고 게시판 삭제 처리
 Routing:: Route('list-g/del', 'Enterprise@destroy');
-#채용공고 게시판 수정 뷰
+#채용공고 게시판 업데이트
 Routing:: Route('list-g/modify', 'Enterprise@update');
 #이력서 정보 저장 처리
 Routing:: Route('resume/store', 'User\Resume@store');
@@ -53,7 +53,13 @@ Routing:: Route('resume/store', 'User\Resume@store');
 Routing:: Route('resume/destroy', 'User\Resume@destroy');
 #이력서 업데이트 처리
 Routing:: Route('resume/update', 'User\Resume@update');
+#이력서 온라인 지원 처리
+Routing:: Route('list-g/apply/store', 'Apply\Apply@store');
 
 
 
+#아이디 중복 체크 팝업
+Routing:: Route('checkId', 'Auth\Auth@checkId');
+#이력서 온라인 지원 팝업
+Routing:: Route('list-g/apply', 'Apply\Apply@index');
 

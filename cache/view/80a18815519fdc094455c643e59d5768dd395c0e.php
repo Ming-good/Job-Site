@@ -1,7 +1,5 @@
 <?php $__env->startSection('home'); ?>
-  <script src="/Job-Site/vender/ml/tf.js"></script>
-  <script src="/Job-Site/vender/ml/web.js"></script>
-  <script src="/Job-Site/assets/js/index.js" defer></script>
+
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <div class="container">
@@ -138,6 +136,7 @@
 		</form>
 		<ul class="menu">
         	    <li><a href="list-g">채용공고관리</a></li>
+        	    <li><a href="guin_management">인제정보관리</a></li>
     		</ul>
 	    </div>
 	</div>

@@ -20,7 +20,7 @@
 		@foreach($data as $row)
 		    <tr>
 			<td>
-			    <a style="font-size:15px;font-weight:bold;margin-left:30px;" href="view?no={{$row['order_id']}}">{{empty($row['title']) ? '이력서' : $row['title']}}</a>
+			    <a style="font-size:15px;font-weight:bold;margin-left:30px;" href="view?no={{$row['order_id']}}">{{$row['title']}}</a>
 			    <p style="margin-left:30px;;color:#999;font-size:12px;">{{$row['created']}}</p>
 			</td>
 			<td>

@@ -6,7 +6,23 @@ use Ming\DB\DBController as DB;
 
 class Resume
 {
+	#이력서 리스트 뷰
 	public function index()
+	{
+                session_start();
+		if(isset($_SESSION['token']) && $_SESSION['authority'] == 'u') {		
+			$userID = $_SESSION['id'];
+			#유저의 이력서 정보를 모두 가져옵니다 (해당 함수는 Resume모델에 존재)
+			$data = DB::resumeShow($userID);
+
+			Blade::view('resume/management', compact('data'));
+		} else {
+			redirect('home');
+		}
+	}
+
+	#이력서 게시판 뷰
+	public function show()
 	{
 		$no = $_GET['no'];
 		#해당 이력서의 정보를 가져옵니다 (해당 함수는 Resume모델에 존재)
@@ -37,24 +53,11 @@ class Resume
 		}
 	}
 
-	#이력서 관리 뷰
-	public function show()
-	{
-                session_start();
-		if(isset($_SESSION['token']) && $_SESSION['authority'] == 'u') {		
-			$userID = $_SESSION['id'];
-			#유저의 이력서 정보를 모두 가져옵니다 (해당 함수는 Resume모델에 존재)
-			$data = DB::resumeShow($userID);
-
-			Blade::view('resume/management', compact('data'));
-		} else {
-			redirect('home');
-		}
-	}
 
 	#이력서 정보 저장
 	public function store()
 	{
+		$inputTitle = $_POST['inputTitle'];
 		session_start();
 		$u_id = $_SESSION['id'];
 		$name = $_POST['inputName'];
@@ -63,14 +66,14 @@ class Resume
 		$mobile = $_POST['inputMobile'];
 		$grade = $_POST['selectGrade'];
 		$school = $_POST['inputSchool'];
-		$title = $_POST['inputTitle'];
+		$title = empty($inputTitle) ? '이력서' : $inputTitle;
 		$content = $_POST['inputContent'];
 		
 		$data = compact('u_id', 'name', 'birth', 'email', 'mobile', 'grade', 'school', 'title', 'content');
 		#이력서를 저장합니다 (해당 함수는 Resume모델에 있습니다)
 		DB::resumeEnrollment($data);
 
-		redirect('home');
+		redirect('resume/management');
 
 	}
 	#이력서 삭제

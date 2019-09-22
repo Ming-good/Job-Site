@@ -102,6 +102,8 @@ class Enterprise
 	#채용공고 게시판 뷰
 	public function show()
 	{
+		session_start();
+		$userID = $_SESSION['id'];
 		$id = $_GET['id'];
 
 		#boardView 함수는 유저데이터와 채용공고 데이터를 리턴합니다. (해당 함수는 JobOpening모델에 있습니다.)
@@ -109,10 +111,14 @@ class Enterprise
 		$listData = $data['listData'];
 		$userData = $data['userData'];
 
+		#resumeValidator은 이력서의 중복지원을 방지하기 위한 유효성 검사 함수입니다.
+		#(해당 함수는 Apply모델에 있습니다)
+		$bool = DB::resumeValidator($userID, $id);
+
 		$map = explode('/', $listData['map']);
 
 		
-		Blade:: view('enterprise/jobBoard', compact('listData', 'userData', 'map'));
+		Blade:: view('enterprise/jobBoard', compact('listData', 'userData', 'map', 'bool'));
 	}
 
 	#채용공고 게시판 등록 처리 

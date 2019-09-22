@@ -82,6 +82,7 @@
 		    </tr>
 		</tbody>
 	    </table>
+	<button id="apply" class="btnA blue big" style="position:relative;left:50%;margin-left:-200px;margin-bottom:40px;margin-top:10px;text-decoration:none;">온라인 지원</button>
 	</div>
     </div>
 
@@ -142,8 +143,36 @@
 	</div>
     </div>
 </div>
-<div id="test">
-</div>
+<script>
+$(document).ready(function(){
+
+	if("<?php echo e($_SESSION['authority']); ?>" == 'e') {
+		$('#apply').hide();
+	} 
+
+	$('#apply').click(function(){
+		if("<?php echo e($_SESSION['authority']); ?>" == 'u' && "<?php echo e($bool); ?>" == true) {
+            		//팝업창 위치
+            		var _width='600';
+            		var _height='800';
+            		var _left = Math.ceil(( window.screen.width - _width )/2);
+            		var _top = -Math.ceil(( window.screen.width - _height )/2);
+
+            		url = "apply?id=<?php echo e($_GET['id']); ?>";
+            		openWin=window.open(url, "chkid", 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top);
+		} else if("<?php echo e($_SESSION['authority']); ?>" == 'u' && "<?php echo e($bool); ?>" == false) {
+			alert('이미 입사지원하신 구직정보 입니다.');
+		} else {
+			alert('개인회원 전용 서비스입니다.');
+			window.location.href="/Job-Site/login";
+		}
+	});
+	if("<?php echo e(empty($listData)); ?>") {
+		alert('없는 정보 입니다.');
+		window.location.href="/Job-Site/home";
+	}
+});
+</script>
 <script>
 // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div

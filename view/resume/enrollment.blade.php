@@ -40,7 +40,7 @@
 	    </div>
 	    <h3 style="font-weight:bold; margin-top:40px;">자기소개서</h3>
             <div class="form-group">
-                <input value="{{$data['title']}}" style="height:50px;text-align:center;" type="text" class="form-control" name="inputTitle" id="inputTitle" placeholder="이력서 제목을 입력해주세요.">
+                <input  autocomplete=off value="{{$data['title']}}" style="height:50px;text-align:center;" type="text" class="form-control" name="inputTitle" id="inputTitle" placeholder="이력서 제목을 입력해주세요.">
 	    </div>
 	    <div class="form-group">
 		<textarea  name="inputContent" class="form-control" rows='10'>{{$data['content']}}</textarea>

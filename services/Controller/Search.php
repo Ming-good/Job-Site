@@ -18,6 +18,7 @@ class Search
 		$values = array();
 		#검색어
 		$keyword = $_GET['inputKeyword'];
+
 		
 		
 

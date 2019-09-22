@@ -18,7 +18,7 @@
             </div>
             <hr />
             <div class="form-group">
-                <a href="" class="bottomWrap"> 회원가입</a>
+                <a href="userSign-up" class="bottomWrap"> 회원가입</a>
             </div>
 	    <div class="form-group">
 		<a  href="javascript:loginKakao()"><img  class="imageSize"  src="/Job-Site/assets/image/kakao_login.png"/></a>

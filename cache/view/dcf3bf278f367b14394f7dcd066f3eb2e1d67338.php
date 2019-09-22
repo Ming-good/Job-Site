@@ -28,7 +28,7 @@
 		</div>
                 <div class="search">
                     <form action="allList" method='GET' onsubmit="return searchKey();">
-                        <input value='<?php echo e($keyword); ?>'  type="search" class="searchForm" name="inputKeyword" id="inputKeyword"/>
+                        <input value='<?php echo e($keyword); ?>' autocomplete=off  type="search" class="searchForm" name="inputKeyword" id="inputKeyword"/>
                         <input type="submit" class="btnA blue" value="검색"/>
                     </form>
                 </div>
@@ -48,6 +48,7 @@
             <li ><a id="resume"  href="Auth/logout">로그아웃</a></li>
 	<?php elseif($_SESSION['authority'] == 'e'): ?>
             <li ><a id="jobOpening" href="/Job-Site/list-g">채용공고 관리</a></li>
+            <li ><a id="jobOpening" href="/Job-Site/guin_management">인제정보 관리</a></li>
             <li ><a id="jobOpening"  href="Auth/logout">로그아웃</a></li>
 	<?php else: ?>
             <li ><a id="resume"  href="/Job-Site/resume/management">이력서 관리</a></li>
