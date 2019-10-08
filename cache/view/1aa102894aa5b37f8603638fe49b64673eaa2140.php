@@ -8,26 +8,48 @@
         </div>
         <div class="col-md-offset-2 col-md-8">
           <div class="loginWrap">
-        <form accept-charset="UTF-8" role="form" method="post" action="Auth/login">
+        <form>
 	    <div class="inputWrap">
-                <input name="id" style="width:250px;"   placeholder="아이디" type="text" class="form-control" />
-                <input name="passwd" style="width:250px;" placeholder="비밀번호" type="password" class="form-control" />
+                <input autocomplete=off name="id" style="width:250px;"   placeholder="아이디" type="text" class="form-control" />
+                <input autocomplete=off name="passwd" style="width:250px;" placeholder="비밀번호" type="password" class="form-control" />
 	    </div>
             <div class="form-group">
-                <input type="submit" class="loginButton" value="로그인" />
+                <input type="submit" id="execute" class="loginButton" value="로그인"/>
             </div>
-            <hr />
             <div class="form-group">
-                <a href="userSign-up" class="bottomWrap"> 회원가입</a>
+                <a href="userSign-up" class="bottomWrap">아직 회원이 아니세요? <span style="font-weight:bold">회원가입</span></a>
             </div>
+	    <div class="warning" id='warning'></div>
 	    <div class="form-group">
 		<a  href="javascript:loginKakao()"><img  class="imageSize"  src="/Job-Site/assets/image/kakao_login.png"/></a>
 	    </div>
+            <hr/>
         </form>
           </div>
         </div>
       </div>
     </div>
+<script>
+$(document).ready(function(){
+$('form').submit(function(){
+	$.ajax({
+		url:"Auth/login",
+		type:"post",
+		data:$('form').serialize(),
+		success:function(data) {
+			if(data == 'true') {
+				history.back();
+			}else if(data == 'false') {
+				$('#warning').html('아이디 또는 비밀번호가 일치하지 않습니다.');
+			} else {
+				$('#warning').html(data);
+			}
+		}
+	})
+	return false;
+})
+})
+</script>
 <script type='text/javascript'>
 
 

@@ -14,7 +14,7 @@ class Apply
 			$userID = $_SESSION['id'];
 			$data = DB::resumeShow($userID);
 		} 
-		Blade::view('resume/apply', compact('data'));
+		Blade::view('apply/apply', compact('data'));
 
 	}
 
@@ -22,12 +22,19 @@ class Apply
 	public function store()
 	{
 		session_start();
-		$opening_no = $_GET['id'];
-		$resume_no = $_POST['radioNo'];
-		$userID = $_SESSION['id'];
+                if(hash_equals($_SESSION['token'], $_POST['_token'])) {
 
-		DB::resumeApply($resume_no, $opening_no, $userID);
+			$opening_no = $_GET['id'];
+			#온라인 지원 신청하는 게시판의 정보를 가져옵니다(해당 함수는 enterprise모델에 있습니다.)
+			$data = DB::onlineData($opening_no);
 
+			$resume_no = $_POST['radioNo'];
+			$title = $data['title'];
+			$e_id = $data['u_id'];
+			$userID = $_SESSION['id'];
+
+			DB::applyStore($resume_no, $opening_no, $title, $userID, $e_id);
+		}
 
 
 	}

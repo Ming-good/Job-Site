@@ -1,15 +1,80 @@
+.star {
+font-size:29px;
+color:#ffe372;
+}
+
+.liveSearch_Wrap {
+width:350px;
+box-shadow:3px 2px 5px 2px #aaaaaa;
+border-left:1px ridge #a6c8ff;
+background-color:#fff;
+}
+
+.liveKey_Wrap {
+width:350px;
+padding:6px 0;
+overflow:hidden;
+white-space:nowrap;
+text-overflow:ellipsis;
+}
+
+.liveSearch_Wrap a {
+padding:17.5px;
+color:black;
+font-size:16px;
+font-family: Georgia, '맑은 고딕', serif;
+}
+
+.searchIMG {
+position:absolute;
+right:0;
+margin-right:100px;
+
+}
+.search_Wrap {
+width:370px;
+margin-top:30px;
+background-color: #fffef8;
+border-left:1px solid #e7e7e7;
+padding-left:20px;
+}
+
+
+.searchKeyword {
+padding:3px 8px 3px 8px;
+overflow:hidden;
+white-space:nowrap;
+text-overflow:ellipsis;
+width:230px;
+}
+
+.rankBox {
+font-size:11px;
+line-height: 12px;
+text-align:center;
+border:1px solid #b9b9b9;
+background-color:#b9b9b9;
+color:#fff;
+margin-right:15px;
+padding:1px 3px 1px 3px;
+}
+
+.keyword:hover{
+border-bottom:1px solid #000;
+}
+
 .imageSize {
 margin-left:151px;
 }
 .bottomWrap {
-width:60px;
+width:200px;
 color:#000;
 position:absolute;
 top:0;
 text-decoration:none;
-text-size:15px;
-margin-top:230px;
-margin-left:150px;
+font-size:13px;
+margin-top:350px;
+margin-left:215px;
 }
 .inputWrap {
 position:relative;
@@ -63,7 +128,7 @@ border-bottom:2px solid #fff;
 
 .ulB {
 margin-left:800px;
-width:100%;
+width:400px;
 }
 
 .ulB li a {
@@ -98,11 +163,32 @@ margin-top:30px;
       font-weight:bold;
       border:none;
 }
+.btnA.white{
+padding-top:1.5px;
+background-color:#fff;
+color:rgba(140, 140, 140, 1);
+width:200px;
+height:53px;
+border: 2px solid #4876ef;
+}
 .btnA.blue{
+margin-top:1px;
 background-color:#4876ef;
 color:#fff;
 width:120px;
 height:53px;
+}
+.btnA.blue.less {
+width:50px;
+height:31px;
+padding:8px 5px 10px 5px;
+font-size:13px;
+}
+.btnA.blue.small { 
+font-size:13px;
+padding:10px 5px 10px 5px;
+width:90px;
+height:35px;
 }
 .btnA.blue.big {
 width:200px;
@@ -400,9 +486,60 @@ width:250px;
 float:left;
 }
 
+.wrapSize2 {
+width:100%;
+height:32px;
+margin-top:20px;
+font-size:16px;
+letter-spacing:-1.2px;
+padding-bottom:15px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+.wrapSize4 {
+width:100%;
+height:32px;
+margin-top:20px;
+font-size:16px;
+letter-spacing:-1.2px;
+padding-bottom:15px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+.wrapSize2.resume {
+padding:0px;
+margin:0px;
+margin-bottom:-5px;
+}
+.wrapSize2.head {
+padding:0px;
+margin-bottom:-5px;
+height:15px;
+font-size:13px;
+}
 
+.wrapSize4.head {
+padding:0px;
+margin-bottom:-5px;
+height:15px;
+font-size:13px;
 
-@media screen and (max-width: 1680px)
+}
+
+.wrapSize3 {
+width:100%;
+}
+
+.warning {
+text-align:center;
+margin-bottom:10px;
+font-size:15px;
+font-weight:bold;
+color:red;
+}
+@media screen and (max-width: 2000px)
 {
 body {
 	    font-size: 12pt;
@@ -420,7 +557,7 @@ body {
 }
 
 .GNB {
-width:1680px;
+width:1330px;
 }
 body {
 	    font-size: 12pt;
@@ -432,9 +569,56 @@ body {
  }
 @media screen and (max-width: 760px)
 {
+.star {
+position:absolute;
+top:50%;
+margin-top:-22.5px;
+}
+.btnA.white{
+padding-top:10px;
+}
+.liveKey_Wrap {
+width:200px;
+}
+.liveSearch_Wrap {
+width:200px;
+overflow:hidden;
+white-space:nowrap;
+text-overflow:ellipsis;
+}
+.search_Wrap {
+width:320px;
+position:relative;
+left:50%;
+margin-left:-160px;
+}
+.searchIMG {
+margin-right: 20px;
+}
+#popupContent {
+overflow-y: scroll; 
+-webkit-overflow-scrolling: touch;
+width:90vw;
+height:90vh;
+}
+.warning {
+width:300px;
+position:relative;
+left:50%;
+margin-left:-150px;
+}
+.wrapSize3 {
+width:130px;
+}
+.wrapSize2 {
+width:180px;
+}
+.wrapSize4 {
+width:140px;
+}
 .bottomWrap {
 left:50%;
-margin-left:-125px;
+margin-left:-85px;
 }
 
 .imageSize {
@@ -466,6 +650,7 @@ display:block;
 }
 .ulB {
 margin-left:0px;
+width:160px;
 display:none;
 }
 .GNB nav {
@@ -499,14 +684,14 @@ width:420px;
 right:25px;
 }
 .wrapSize {
-width:140px;
+width:200px;
 }
 .searchForm.small {
 width: 100px;
 height:34px;
 }
 .wrap {
-	width:0px;
+	width:100%;
 }
 .wrap_my {
 	display:none;
@@ -581,7 +766,6 @@ body {
 
 
 #nav {
-
    background-color: #4876ef;
    text-align: center;
    position: fixed;

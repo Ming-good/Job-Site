@@ -8,7 +8,35 @@ class Management
 {
 	public function index()
 	{
-		echo '에휴 인생 답이 없다. 하...';
+                session_start();
+                if(isset($_SESSION['token']) && $_SESSION['authority'] == 'e') {
+			$e_id = $_SESSION['id'];
+
+			$db = DB::Connect();
+			$sql = "SELECT * FROM apply WHERE e_id=:e_id";
+			$stmt = $db -> prepare($sql);
+			$stmt -> bindValue(':e_id', $e_id);
+			$stmt -> execute();
+			$data = $stmt -> fetchAll();
+
+			Blade::view('apply/applicant', compact('data'));
+
+		} else {
+			redirect('home');
+		}
+
+	}
+
+	public function destroy()
+	{
+		session_start();
+		if($_SESSION['authority'] == 'e' && hash_equals($_SESSION['token'], $_POST['_token'])) {	
+			$id = $_GET['id'];
+			DB::applyDel($id);
+			
+		}
+		
+
 	}
 }
 

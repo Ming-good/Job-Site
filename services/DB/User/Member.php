@@ -45,7 +45,6 @@ trait Member
 	#로그인
 	public function login($id, $pw)
 	{
-		$bool = false;
                 $db = DB::Connect();
                 $stmt = $db -> prepare('SELECT * FROM account_info WHERE u_id = :id');
                 $stmt -> bindValue(':id', $id);
@@ -53,7 +52,7 @@ trait Member
 		$userData = $stmt -> fetch();
 
 		if(!$userData) {
-			return $bool;	
+			return false;	
 		}
 
 		if (password_verify($pw, $userData['u_pw'])) {
@@ -64,8 +63,10 @@ trait Member
 			$_SESSION['authority'] = $userData['authority'];
 			$_SESSION['id'] = $userData['u_id'];
 		} else {
-			return $bool;
+			return false;
 		}
+
+		return true;
 	}
 
 	#카카오 회원가입
@@ -115,6 +116,21 @@ trait Member
 
 		$data = $stmt -> fetch();
 		return $data;
+	}
+
+	#게시물 제작자 체크
+	public function producer($no, $table)
+	{
+                $db = DB::Connect();
+                $sql = 'SELECT u_id FROM '.$table.' WHERE order_id=:order_id';
+                $stmt = $db -> prepare($sql);
+                $stmt -> bindValue(':order_id', $no);
+		$stmt -> execute();
+
+		$data = $stmt -> fetch();
+		return $data;
+
+
 	}
 
 }

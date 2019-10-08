@@ -1,5 +1,6 @@
 @extends('layout/layout')
 @section('Content')
+
 <link rel="stylesheet" href="/Job-Site/assets/css/resume.css"/>
 <div class="container" id="test">
     <div class="row">
@@ -11,15 +12,15 @@
 		    <label for="inputName" style="font-size:11px;color:#a8a8a8;">이름</label>
 		    <input style="outline:none;height:30px;width:105px;border: 0 none;" type="text" name="inputName" id="inputName" value={{$data['name']}}>
 		</div>
-		<div class="inputBirth" id="box2">
+		<div class="inputBirth" id="box">
 		    <label for="inputBirth" style="font-size:11px;color:#a8a8a8;">생년월일</label>
 		    <input maxlength="8" placeholder="19940403" style="outline:none;height:30px;width:105px;border: 0 none;" type="text" name="inputBirth" id="inputBirth" value={{$data['birthday']}}>
 		</div>
-		<div class="inputEmail" id="box3">
+		<div class="inputEmail" id="box">
 		    <label for="inputEmail" style="font-size:11px;color:#a8a8a8;">이메일</label>
 		    <input style="outline:none;height:30px;width:200px;border: 0 none;" type="text" name="inputEmail" id="inputEmail" value={{$data['email']}}>
 		</div>
-		<div class="inputMobile" id="box4">
+		<div class="inputMobile" id="box">
 		    <label for="inputMobile" style="font-size:11px;color:#a8a8a8;">휴대폰번호</label>
 		    <input maxlength="13" style="outline:none;height:30px;width:105px;border: 0 none;" type="text" name="inputMobile" id="inputMobile" placeholder="010-6687-7665" oninput="mobileCheck();" value={{$data['mobile']}}>
 		</div>
@@ -48,45 +49,32 @@
 	    <div style="text-align:center;">
 	        <input class="button1" type="submit" value="작성완료">
 	    </div>
+	        <input type="hidden" name="_token" value="{{$_SESSION['token']}}"/>
 	    </form>
 	</div>
     </div>
 </div>
 
 <script>
-window.onclick = function() 
+var beforeFocus;
+var checkNum = 1;
+window.onclick = function(e) 
 {
-	var focus = document.activeElement;
-
-	if(focus.id == 'inputName') {
-		document.getElementById('box').style.border = "1px solid #4876ef";
+	focus = e.target.parentNode;
+	if(focus.id == 'box' && checkNum == 1) {
+		focus.style.border = "1px solid #4876ef";
+		beforeFocus = focus;
+		checkNum = 0;
+	} else if(focus.id == 'box' && checkNum == 0){
+		focus.style.border = "1px solid #4876ef";
+		beforeFocus.style.border = "1px solid #dfdfdf";
+		beforeFocus = focus;
+		checkNum = 0;
 	} else {
-		document.getElementById('box').style.border = "1px solid #dfdfdf";
+		beforeFocus.style.border = "1px solid #dfdfdf";
+		checkNum = 1;
 	}
 
-	if(focus.id == 'inputBirth') {
-		document.getElementById('box2').style.border = "1px solid #4876ef";
-	} else {
-		document.getElementById('box2').style.border = "1px solid #dfdfdf";
-	}
-
-	if(focus.id == 'inputEmail') {
-		document.getElementById('box3').style.border = "1px solid #4876ef";
-	} else {
-		document.getElementById('box3').style.border = "1px solid #dfdfdf";
-	}
-
-	if(focus.id == 'inputMobile') {
-		document.getElementById('box4').style.border = "1px solid #4876ef";
-	} else {
-		document.getElementById('box4').style.border = "1px solid #dfdfdf";
-	}
-
-	if(focus.id == 'inputSchool') {
-		document.getElementById('box5').style.border = "1px solid #4876ef";
-	} else {
-		document.getElementById('box5').style.border = "1px solid #dfdfdf";
-	}
 }
 
 //휴대폰 번호를 입력할 때 - 가 출력되게 합니다.

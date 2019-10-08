@@ -50,9 +50,18 @@ class Search
                         $data[$i]['modify'] = $modify[0];
                         $i++;
 		}
+
+
  
 		$addr = 'allList'; 
 		Blade::view('search/search', compact('data', 'keyword', 'nav', 'addr'));
+	}
+	
+	#AJAX를 이용한 라이브 검색
+	public function liveSearch()
+	{
+		$keyword = $_GET['inputKeyword'];
+		DB::liveSearch($keyword);
 	}
 
 }

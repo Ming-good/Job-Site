@@ -13,19 +13,20 @@ class Post
 	{
 		#메인 페이지에 최근채용정보를 가져옵니다(해당 함수는 JopOpening모델에 있습니다.)
 		$data = DB::indexMenu();
+		#실시간 검색어 데이터
+		$searchData = DB::realTimeSearch();
 		
 
 		session_start();
 		if (isset($_SESSION['token'])) {
 			$token = $_SESSION['token'];
-			$email = $_SESSION['email'];
 			$name = $_SESSION['name'];
 			$authority = $_SESSION['authority'];
 			
-			Blade:: view('index', compact('data', 'token', 'email', 'name', 'authority'));
+			Blade:: view('index', compact('data', 'token', 'name', 'authority', 'searchData'));
 		} else {
 
-			Blade:: view('index', compact('data'));
+			Blade:: view('index', compact('data', 'searchData'));
 		}
 
 	}

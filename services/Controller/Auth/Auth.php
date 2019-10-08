@@ -49,13 +49,22 @@ class Auth
         {
                 $id = $_POST['id'];
 		$pw = $_POST['passwd'];
+
 		#로그인 함수 (해당 함수는 Member모델에 있습니다.)
                 $bool = DB::login($id, $pw);
-		if($bool == false) {
-                    return redirect('login');
+
+		if(empty($id)) {
+			echo '아이디를 입력해주세요.';
+		} else if(empty($pw)) {
+			echo '비밀번호를 입력해주세요.';
+		} else if($bool == false) {
+			echo "false";
+		} else if($bool == true) {
+			echo 'true';
 		}
 
-        }
+	}
+
 
 	#로그아웃. 세션제거
 	public function logout()

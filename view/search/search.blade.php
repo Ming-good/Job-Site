@@ -7,7 +7,7 @@
 	<div class="col-sm-12">
             <h3><span style="font-weight:bold;">채용공고 상세검색</span></h3>
 	    <div style="border-top:2px solid;border-left:1px solid #dfdfdf;border-right:1px solid #dfdfdf;padding:30px 30px 30px 30px;">
-		    <form method="GET" action="allList">
+		    <form method="GET" action="allList" onsubmit="return searchKey2();">
 			<div class="selectSpan">
 			    <span style="width:70px; float:left;font-weight:bold;padding-top:5px;">지역선택:</span>
 			    <span style="width:140px;">
@@ -60,7 +60,7 @@
                         </div>
 			<div style="margin-top:15px;">
 			    <span style="width:70px; float:left;font-weight:bold;padding-top:5px;">검색어:</span>
-                            <input value='{{$keyword}}'  type="search" class="searchForm small" name="inputKeyword" id="inputKeyword"/>
+                            <input value='{{$keyword}}'  type="search" class="searchForm small" name="inputKeyword" id="inputKeyword2"/>
                             <input type="submit" class="btn btn-primary" style="margin-top:2px;" value="검색"/>
 			</div>
 		    </form>
@@ -77,12 +77,12 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <h5 style="letter-spacing:-1.2px;">{{$row['company']}}</h5>
+                                            <h5 class="wrapSize4 head">{{$row['company']}}</h5>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h4 style="margin-top:0px;font-size:16px;letter-spacing:-1.2px;padding-bottom:15px;overflow:hidden;height:32px;"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
+                                            <h4 class="wrapSize4"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
 
                                         </td>
                                     </tr>
@@ -146,4 +146,15 @@
     </div>
 
 </div>
+<script>
+        function searchKey2()
+        {
+                var keyword = document.getElementById('inputKeyword2');
+                keyword.value = keyword.value.trim();
+                if(keyword.value.length<2) {
+                        alert('키워드는 최소 2글자 이상으로 입력해주세요.');
+                        return false;
+                }
+        }
+</script>
 @stop

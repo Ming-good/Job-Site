@@ -1,7 +1,12 @@
 <?php $__env->startSection('home'); ?>
-
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+if("<?php echo e($_SESSION['check']); ?>") {
+	alert('잘못된 접근방식 입니다.');
+	<?php echo e($_SESSION['check'] = false); ?>
 
+}
+</script>
 <div class="container">
     <div  class="wrap">
 	<div class="col-sm-8">
@@ -115,8 +120,7 @@
 		</form>
 		<ul class="menu">
         	    <li><a href="resume/management">이력서 관리</a></li>
-        	    <li><a href="">열람기업</a></li>
-        	    <li><a href="">스마트매치</a></li>
+        	    <li><a href="/Job-Site/scrap/list">스크랩</a></li>
     		</ul>
 	    </div>
 	<?php else: ?>
@@ -139,25 +143,24 @@
         	    <li><a href="guin_management">인제정보관리</a></li>
     		</ul>
 	    </div>
-	</div>
 	<?php endif; ?>	
 
 <?php else: ?>
 <!-- 로그인 -->
          <div class="wrap_my">
-         <form method="POST" action="Auth/login">
+         <form id="forms">
                  <div >
                       <a class="user_login" href="userSign-up">회원가입</a>
                  </div>
                  <div class ="login_input">
                      <span class ="box_inp">
-                         <input type="text" name="id" id="login_person_id"  class="inp_login" placeholder="아이디" >
+                         <input autocomplete=off type="text" name="id" id="id"  class="inp_login" placeholder="아이디" >
                      </span>
                      <span class ="box_inp">
-                         <input type="password" name="passwd" id="login_person_id"  class="inp_login" placeholder="비밀번호" >
+                         <input autocomplete=off type="password" name="passwd" id="passwd"  class="inp_login" placeholder="비밀번호" >
                      </span>
                      <span>
-                         <input type="submit" class="btn_login" value="로그인">
+                         <input type="submit" id="execute" class="btn_login" value="로그인"/>
                      </span>
                  </div>
 		      <a class="pull-right" style="margin-top:10px;"  href="javascript:loginKakao()"><img src="/Job-Site/assets/image/login.png"/></a>
@@ -168,11 +171,69 @@
 
 
 <?php endif; ?>
+	<div class="search_Wrap">
+	    <div style="margin-bottom:15px;">
+		<h2 style="font-weight:bold;font-size:15px;">실시간 검색어 순위</h2>
+	    </div>
+	    <ol style="list-style:none;padding:0px;">
+		    <?php $__currentLoopData = $searchData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+		<li class="searchKeyword">
+			        <a style="text-decoration:none;color:#000;" href="/Job-Site/allList?inputKeyword=<?php echo e($row['keyword']); ?>">
+				    <em class="rankBox"><?php echo e($row['rank']); ?></em>
+				    <span class="keyword"><?php echo e($row['keyword']); ?></span>
+				<?php if($row['RANKING'] == 0): ?>
+				    <span class="searchIMG">
+					<img src="/Job-Site/assets/image/unchanged.gif"/>
+					<span style="font-size:12px;margin-left:10px;"><?php echo e($row['RANKING']); ?></span>
+				    </span>
+				<?php elseif($row['RANKING'] == 999): ?>
+				    <span class="searchIMG">
+					<img src="/Job-Site/assets/image/new.gif"/>
+					<span style="font-size:12px;margin-left:10px;">0</span>
+				    </span>
+				<?php elseif($row['RANKING'] > 0): ?>
+				    <span class="searchIMG">
+					<img src="/Job-Site/assets/image/down.gif"/>
+					<span style="font-size:12px;margin-left:10px;"><?php echo e($row['RANKING']); ?></span>
+				    </span>
+				<?php elseif($row['RANKING'] < 0): ?>
+				    <span class="searchIMG">
+					<img src="/Job-Site/assets/image/up.gif"/>
+					<span style="font-size:12px;margin-left:10px;"><?php echo e($row['RANKING'] * -1); ?></span>
+				    </span>
+				<?php endif; ?>
+			        </a> 
+		</li>
+		    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+	    </ol>
+	</div>
 
 
 	</div>
     </div>
 </div>
+<script>
+$(document).ready(function(){
+	$('#forms').submit(function(){
+		$.ajax({
+			type:"post",
+			url:"Auth/login",
+			data:$('#forms').serialize(),
+			success:function(data) {
+				if(data == 'true') {
+					window.location.reload();
+				} else if(data == 'false') {
+					alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+					window.location.href="/Job-Site/login";
+				} else {
+					alert(data);
+				}
+			}
+		})
+		return false;
+	})
+})
+</script>
 
 <script type='text/javascript'>
 

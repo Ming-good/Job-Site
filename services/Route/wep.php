@@ -55,6 +55,16 @@ Routing:: Route('resume/destroy', 'User\Resume@destroy');
 Routing:: Route('resume/update', 'User\Resume@update');
 #이력서 온라인 지원 처리
 Routing:: Route('list-g/apply/store', 'Apply\Apply@store');
+#온라인 지원 받은 이력서 삭제
+Routing:: Route('guin_del', 'Apply\Management@destroy');
+#라이브 검색
+Routing:: Route('liveSearch', 'Search@liveSearch');
+#스크랩 리스트
+Routing:: Route('scrap/list', 'User\Scrap@index');
+#스크랩 생성
+Routing:: Route('scrap/create', 'User\Scrap@create');
+#스크랩 삭제
+Routing:: Route('scrap/del', 'User\Scrap@delete');
 
 
 

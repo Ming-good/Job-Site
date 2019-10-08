@@ -28,15 +28,31 @@ class Resume
 		#해당 이력서의 정보를 가져옵니다 (해당 함수는 Resume모델에 존재)
 		$data = DB::resumeView($no);
 
+		if(empty($data)) {
+			session_start();
+			$_SESSION['check'] = true;
+			return redirect('home');
+		}
+
 		Blade::view('resume/board', compact('data'));
 	}
 	#이력서 수정 ⊙ 작성 뷰
 	public function create()
 	{
 		session_start();
-                if($_SESSION['authority'] == 'u' && hash_equals($_SESSION['token'], $_POST['_token'])) {
+		$no = $_GET['no'];
+                if($_SESSION['authority'] == 'u' && $_GET['mode'] == 'modify') {
+
+                        #게시물 제작자가 맞는지 확인합니다.
+                        $checkID = DB::producer($no, 'resume');
+                        if($checkID['u_id'] != $_SESSION['id']) {
+				$_SESSION['check'] = true;
+                                return redirect('home');
+
+                        }
+
+
 			$mode = 'modify';
-			$no = $_GET['no'];
 
 			$data = DB::resumeView($no);
 
@@ -57,23 +73,24 @@ class Resume
 	#이력서 정보 저장
 	public function store()
 	{
-		$inputTitle = $_POST['inputTitle'];
 		session_start();
-		$u_id = $_SESSION['id'];
-		$name = $_POST['inputName'];
-		$birth = $_POST['inputBirth'];
-		$email = $_POST['inputEmail'];
-		$mobile = $_POST['inputMobile'];
-		$grade = $_POST['selectGrade'];
-		$school = $_POST['inputSchool'];
-		$title = empty($inputTitle) ? '이력서' : $inputTitle;
-		$content = $_POST['inputContent'];
+		if(hash_equals($_SESSION['token'], $_POST['_token'])) {
+			$inputTitle = $_POST['inputTitle'];
+			$u_id = $_SESSION['id'];
+			$name = $_POST['inputName'];
+			$birth = $_POST['inputBirth'];
+			$email = $_POST['inputEmail'];
+			$mobile = $_POST['inputMobile'];
+			$grade = $_POST['selectGrade'];
+			$school = $_POST['inputSchool'];
+			$title = empty($inputTitle) ? '이력서' : $inputTitle;
+			$content = $_POST['inputContent'];
 		
-		$data = compact('u_id', 'name', 'birth', 'email', 'mobile', 'grade', 'school', 'title', 'content');
-		#이력서를 저장합니다 (해당 함수는 Resume모델에 있습니다)
-		DB::resumeEnrollment($data);
-
-		redirect('resume/management');
+			$data = compact('u_id', 'name', 'birth', 'email', 'mobile', 'grade', 'school', 'title', 'content');
+			#이력서를 저장합니다 (해당 함수는 Resume모델에 있습니다)
+			DB::resumeEnrollment($data);
+		}
+		return redirect('resume/management');
 
 	}
 	#이력서 삭제
@@ -85,27 +102,31 @@ class Resume
 			#이력서 정보를 삭제합니다 (해당 함수는 Resume모델에 존재)
 			DB::resumeDel($no);	
 		}
-		redirect('resume/management');
+
+		return redirect('home');
 	}
 	
 	#이력서 정보 업데이트 처리
 	public function update()
 	{
-		$no = $_GET['no'];
-                $name = $_POST['inputName'];
-                $birth = $_POST['inputBirth'];
-                $email = $_POST['inputEmail'];
-                $mobile = $_POST['inputMobile'];
-                $grade = $_POST['selectGrade'];
-                $school = $_POST['inputSchool'];
-                $title = $_POST['inputTitle'];
-                $content = $_POST['inputContent'];
+		session_start();
+                if(hash_equals($_SESSION['token'], $_POST['_token'])) {
+			$no = $_GET['no'];
+                	$name = $_POST['inputName'];
+                	$birth = $_POST['inputBirth'];
+                	$email = $_POST['inputEmail'];
+                	$mobile = $_POST['inputMobile'];
+                	$grade = $_POST['selectGrade'];
+                	$school = $_POST['inputSchool'];
+                	$title = $_POST['inputTitle'];
+                	$content = $_POST['inputContent'];
 
-                $data = compact( 'no', 'name', 'birth', 'email', 'mobile', 'grade', 'school', 'title', 'content');
+                	$data = compact( 'no', 'name', 'birth', 'email', 'mobile', 'grade', 'school', 'title', 'content');
 
-		#이력서 정보를 갱신합니다 (해당 함수는 Resume모델에 존재)
-		DB::resumeUpdate($data);
-		redirect('resume/management');
+			#이력서 정보를 갱신합니다 (해당 함수는 Resume모델에 존재)
+			DB::resumeUpdate($data);
+		}
+		return redirect('resume/management');
 		
 	}
 }

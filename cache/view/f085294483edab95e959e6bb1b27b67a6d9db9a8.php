@@ -26,14 +26,14 @@
 	        <tr>
    	            <th style="text-align:center;">이력서 제목</th>
 	        </tr>
-		@foreach($data as $row)
+		<?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 	        <tr>
 		    <td>
-			<input type="radio" name="radioNo" id="radio-1" class="custom-control-input" value="{{$row['order_id']}}">
-			<a onclick="moving({{$row['order_id']}});" href="#" style="margin-left:20px;font-size:14px;text-decoration:none;font-weight:bold;">{{$row['title']}}</a>
+			<input type="radio" name="radioNo" id="radio-1" class="custom-control-input" value="<?php echo e($row['order_id']); ?>">
+			<a onclick="moving(<?php echo e($row['order_id']); ?>);" href="#" style="margin-left:20px;font-size:14px;text-decoration:none;font-weight:bold;"><?php echo e($row['title']); ?></a>
 		    </td>	
 	        </tr>
-		@endforeach
+		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	    </tboty>
         </table>
 	<div style="margin-top:40px;">
@@ -51,7 +51,7 @@ $(document).ready(function() {
 			return false;
 		} else {
 			$.ajax({
-				url:"apply/store?id={{$_GET['id']}}",
+				url:"apply/store?id=<?php echo e($_GET['id']); ?>",
 				type:"post",
 				data:$('form').serialize(),
 				success:function(data){
@@ -61,7 +61,7 @@ $(document).ready(function() {
 			})
 		}
 	});
-	if("{{$_SESSION['authority']}}" != 'u'){
+	if("<?php echo e($_SESSION['authority']); ?>" != 'u'){
                alert('개인회원 전용 서비스입니다.');
                window.location.href="/Job-Site/login";
 	}
@@ -75,3 +75,4 @@ function moving(no)
 	window.opener.location.href="/Job-Site/resume/view?no="+no;
 }
 </script>
+<?php /**PATH /var/www/html/Job-Site/view/resume/apply.blade.php ENDPATH**/ ?>

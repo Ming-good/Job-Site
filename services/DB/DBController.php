@@ -4,6 +4,7 @@ namespace Ming\DB;
 use \PDO;
 use Ming\DB\User\Member;
 use Ming\DB\User\Resume;
+use Ming\DB\User\Scrap;
 use Ming\DB\Enterprise\JobOpening;
 use Ming\DB\Search\Search;
 use Ming\DB\Apply\Apply;
@@ -28,4 +29,5 @@ class DBController
 	use Search;
 	use Resume;
 	use Apply;
+	use Scrap;
 }

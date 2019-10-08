@@ -1,4 +1,5 @@
 <?php $__env->startSection('Content'); ?>
+
 <div class="container">
     <div class="wrap_board">
 	<div class="col-sm-offset-2 col-sm-8">
@@ -181,6 +182,7 @@
                 <input type="submit" value="등록"  class="btn btn-primary pull-right"/>
                 <input type="button" value="글 목록으로" class="btn btn-primary btn-rounded  pull-left" onclick="javascript:location.href='/Job-Site/list-g'"/>
 
+		<input type="hidden" name="_token" value="<?php echo e($_SESSION['token']); ?>"/>
 
             </form>
 	</div>

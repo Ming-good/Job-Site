@@ -9,10 +9,10 @@
 		<thead>
 		    <tr>
 			<th style="text-align:center;width:700px;">
-			    이력서제목
+			    <p>이력서제목</p>
 			</th>
-			<th colspan="2" style="text-align:center;width:230px;">
-			    이력서관리
+			<th colspan="2" style="text-align:center;">
+			    <p class="wrapSize3">이력서관리</p>
 			</th>
 		    </tr>
 		</thead>
@@ -20,34 +20,36 @@
 		@foreach($data as $row)
 		    <tr>
 			<td>
-			    <a style="font-size:15px;font-weight:bold;margin-left:30px;" href="view?no={{$row['order_id']}}">{{$row['title']}}</a>
+			    <h4 class="wrapSize2 resume"><a style="margin-left:30px;font-weight:bold;" href="view?no={{$row['order_id']}}">{{$row['title']}}</a></h4>
 			    <p style="margin-left:30px;;color:#999;font-size:12px;">{{$row['created']}}</p>
 			</td>
-			<td>
-                           <form action="/Job-Site/resume?no={{$row['order_id']}}" method='POST'>
-			        <input type="submit" value="수정" class="button2" style="float:right;">
-                                <input type="hidden" name="_token" value="{{$_SESSION['token']}}"/>
-                           </form>
-
+			<td style="width:100px">
+                            <a class="btnA blue less" href="/Job-Site/resume?no={{$row['order_id']}}&mode=modify" style="float:right;text-decoration:none;">수정</a>
 			</td>
-			<td>
-                           <form onsubmit="return del();" action="/Job-Site/resume/destroy?no={{$row['order_id']}}" method='POST'>
-			        <input type="submit"  value="삭제" class="button2" style="float:left;">
-                                <input type="hidden" name="_token" value="{{$_SESSION['token']}}"/>
-                           </form>
+			<td style="width:100px">
+			    <a class="btnA blue less" href="javascript:del('/Job-Site/resume/destroy?no={{$row['order_id']}}')"style="text-decoration:none;">삭제</a>
 			</td>
 		    </tr>
 		@endforeach
 		</tbody>
 	    </table>
-	    <button id="btn" type="button" style="float:right;margin-top:20px;" class="button3">이력서 등록</button>
+	    <button id="btn" type="button" style="float:right" class="button3">이력서 등록</button>
 	</div>
     </div>
 </div>
 <script>
-	function del() {
+	function del(location) {
 		var result = confirm('삭제하시겠습니까?');
 		if(result) {
+                        $.ajax({
+                                url:location,
+                                type:"post",
+                                data:{_token:"{{$_SESSION['token']}}"},
+                                success:function(){
+                                        window.location.reload();
+                                }
+                        })
+
 			return true;
 		} else {
 			return false;

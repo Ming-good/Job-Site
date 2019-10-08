@@ -15,12 +15,12 @@
 				<tbody>
 				    <tr>
 					<td>
-			    		    <h5 style="letter-spacing:-1.2px;">{{$userData['company']}}</h5>
+			    		    <h5 class="wrapSize2 head">{{$row['company']}}</h5>
 					</td>
 				    </tr>
 				    <tr>
-					<td>
-			    		    <h4 style="margin-top:0px;font-size:16px;letter-spacing:-1.2px;padding-bottom:15px;overflow:hidden;height:32px;"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
+					<td >
+			    		    <h4 class="wrapSize2"><a href="list-g/board?id={{$row['order_id']}}" style="text-decoration:none;color:#333;font-weight:bold;">{{$row['title']}}</a></h4>
 
 					</td>
 				    </tr>
@@ -58,14 +58,8 @@
 		    </tr>
 		    <tr>
 			<td colspan="2">
-			    <form action="list-g/del?id={{$row['order_id']}}" method='POST' onsubmit = "return del();">
-			        <input class="btn btn-info btn-xs pull-right" value="삭제" type="submit"/>
-				<input type="hidden" name="_token" value="{{$_SESSION['token']}}"/>
-			    </form>
-			    <form action="jobOpening?id={{$row['order_id']}}" method='POST'>
-			        <input style="margin-right:10px;"class="btn btn-info btn-xs pull-right" value="수정" type="submit"/>
-				<input type="hidden" name="_token" value="{{$_SESSION['token']}}"/>
-			    </form>
+			    <a href="javascript:del('list-g/del?id={{$row['order_id']}}')" class="btn btn-info btn-xs pull-right">삭제</a>
+			    <a href="jobOpening?id={{$row['order_id']}}&mode=modify" style="margin-right:10px;" class="btn btn-info btn-xs pull-right">수정</a>
 			</td>
 		    </tr>
 			    @endforeach
@@ -95,9 +89,18 @@
     </div>
 </div>
 <script>
-	function del() {
+	function del(location) {
 		var msg='삭제하시겠습니까?';
 		if (confirm(msg)){
+			$.ajax({
+				url:location,
+				type:"post",
+				data:{_token:"{{$_SESSION['token']}}"},
+				success:function(){
+					window.location.reload();
+				}
+			})
+
 			return true;
 		} else {
 			return false;

@@ -82,7 +82,10 @@
 		    </tr>
 		</tbody>
 	    </table>
+<?php if($_SESSION['authority'] != 'e'): ?>
 	<button id="apply" class="btnA blue big" style="position:relative;left:50%;margin-left:-200px;margin-bottom:40px;margin-top:10px;text-decoration:none;">온라인 지원</button>
+	<button id="scrap"  class="btnA white" style="position:relative;left:50%;margin-left:-0px;margin-bottom:40px;margin-top:10px;text-decoration:none;">&nbsp스크랩&nbsp&nbsp<span class="star">☆</span></button>
+<?php endif; ?>
 	</div>
     </div>
 
@@ -143,12 +146,16 @@
 	</div>
     </div>
 </div>
+
 <script>
 $(document).ready(function(){
+	var success = "<?php echo e($answer['success']); ?>";
 
-	if("<?php echo e($_SESSION['authority']); ?>" == 'e') {
-		$('#apply').hide();
-	} 
+	if(success == 1) {
+		$('.star').html('★');
+		$('.star').css('color','#ffe372');
+	}
+
 
 	$('#apply').click(function(){
 		if("<?php echo e($_SESSION['authority']); ?>" == 'u' && "<?php echo e($bool); ?>" == true) {
@@ -163,14 +170,44 @@ $(document).ready(function(){
 		} else if("<?php echo e($_SESSION['authority']); ?>" == 'u' && "<?php echo e($bool); ?>" == false) {
 			alert('이미 입사지원하신 구직정보 입니다.');
 		} else {
-			alert('개인회원 전용 서비스입니다.');
-			window.location.href="/Job-Site/login";
+			if(confirm('개인회원 전용 서비스입니다.\n로그인 창으로 이동하시겠습니까?')) {
+
+				window.location.href="/Job-Site/login";
+			}
 		}
 	});
-	if("<?php echo e(empty($listData)); ?>") {
-		alert('없는 정보 입니다.');
-		window.location.href="/Job-Site/home";
-	}
+
+	$('#scrap').click(function(){
+		if("<?php echo e($_SESSION['authority']); ?>" == 'u') {
+		    var inputURL = "/Job-Site/scrap/create";
+		    var delURL = "/Job-Site/scrap/del";
+
+		    $.ajax({
+		    url:(success == 1) ? delURL : inputURL,
+			type:"post",
+			data:{
+				'title':"<?php echo e($listData['title']); ?>",
+				'id':'<?php echo e($_GET["id"]); ?>',
+				'_token':"<?php echo e($_SESSION['token']); ?>"
+			},
+			success:function(data) {
+			    success = data;
+			    
+			    if(data == 1) {
+			        $('.star').html('★');
+			        $('.star').css('color','#ffe372');
+			    } else {
+				$('.star').html('☆');
+				$('.star').css('color','rgba(140, 140, 140, 1);');
+			    }
+			}
+		    });
+		} else { 
+                        if(confirm('개인회원 전용 서비스입니다.\n로그인 창으로 이동하시겠습니까?')) {
+                                window.location.href="/Job-Site/login";
+                        }
+		}
+	});
 });
 </script>
 <script>

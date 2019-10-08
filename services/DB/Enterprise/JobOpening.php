@@ -148,5 +148,19 @@ trait JobOpening
 		
 		return compact('nav', 'data');
 	}
+
+	#이력서 온라인 지원에 필요한 게시물 정보를 가져옵니다.
+	public function onlineData($no)
+	{
+		$db = DB::Connect();
+		$sql = "SELECT u_id,title FROM opening WHERE order_id=:no";
+		$stmt = $db -> prepare($sql);
+		$stmt -> bindValue(':no', $no);
+		$stmt -> execute();
+		$data = $stmt -> fetch();
+		return $data;
+
+
+	}
 }
 
