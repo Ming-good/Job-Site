@@ -68,6 +68,13 @@
 		    <caption><h4><span style="color:#4876ef;"><?php echo e($keyword); ?></span> 채용공고 정보</h4></caption>
 		</thead>
                 <tbody>
+		 <?php if(empty($data)): ?>
+		    <tr>
+			<td>
+			    <h1>검색결과가 없습니다.</h1>
+			</td>
+		    </tr>
+		 <?php else: ?>
                  <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td>
@@ -115,8 +122,9 @@
                                 <p style="font-size:13px;color:#666;letter-spacing:-1.2px;">수정일 : <?php echo e($row['modify']); ?></p>
                             </div>
                         </td>
-                    </tr>
+		    </tr>
 		    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+		    <?php endif; ?>
                 </tbody>
             </table>
 
@@ -149,7 +157,7 @@
         {
                 var keyword = document.getElementById('inputKeyword2');
                 keyword.value = keyword.value.trim();
-                if(keyword.value.length<2) {
+                if(keyword.value.length<2 && keyword.value.length > 0) {
                         alert('키워드는 최소 2글자 이상으로 입력해주세요.');
                         return false;
                 }

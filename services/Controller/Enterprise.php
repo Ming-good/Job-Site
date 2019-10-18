@@ -86,7 +86,7 @@ class Enterprise
                 	empty($_FILES['userfile']['name']) ? $fileName : $fileName = upload('/var/www/html/Job-Site/assets/upload/', $_FILES['userfile']);
 			$order_id = $_GET['id'];
 			$mapInfo = $_POST['mapInfo'];
-			$company = $_POST['company'];
+			$company = $_SESSION['company'];
 		
                 	$data = compact('u_id', 'title', 'category1', 'category2', 'hire', 'shape','salary', 'money', 'area', 'sex', 'career', 'comment', 'fileName', 'order_id', 'mapInfo', 'company');
 		#채용공고 정보를 업데이트 합니다.(해당 함수는 JobOpening모델에 있습니다.)

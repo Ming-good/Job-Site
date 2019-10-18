@@ -1,5 +1,6 @@
 <?php $__env->startSection('home'); ?>
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <script>
 if("<?php echo e($_SESSION['check']); ?>") {
 	alert('잘못된 접근방식 입니다.');

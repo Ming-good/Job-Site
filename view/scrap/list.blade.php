@@ -11,7 +11,7 @@
 			<th style="text-align:center;width:700px;">
 			    <p>제목</p>
 			</th>
-			<th  style="text-align:left;width:100px;">
+			<th  style="text-align:center;width:100px;">
 			    <p class="wrapSize3">스크랩관리</p>
 			</th>
 		    </tr>
@@ -22,7 +22,7 @@
 			<td>
 			    <h4 class="wrapSize2 resume"><a style="margin-left:30px;font-weight:bold;" href="/Job-Site/list-g/board?id={{$row['opening_no']}}">{{$row['title']}}</a></h4>
 			</td>
-			<td style="width:100px">
+			<td style="width:100px;text-align:center;">
 			    <a class="btnA blue less" href="javascript:del('/Job-Site/scrap/del', {{$row['opening_no']}})"style="text-decoration:none;">삭제</a>
 			</td>
 		    </tr>

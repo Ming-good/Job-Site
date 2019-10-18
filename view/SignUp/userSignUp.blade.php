@@ -21,7 +21,7 @@
                     </div>
                     <div class="forms required">
                         <label for="inputBirthday">생년월일</label>
-                        <input Maxlength="8" type="text" class="form-control" name="inputBirthday"  id="inputBirthday" placeholder="EX)20190804 = 2019년 8월 4일" required>
+                        <input Maxlength="8" type="text" class="form-control" name="inputBirthday"  id="inputBirthday" placeholder="EX)YYYYMMDD" required>
                     </div>
                     <div class="forms required">
                         <label for="inputEmail">이메일 </label>

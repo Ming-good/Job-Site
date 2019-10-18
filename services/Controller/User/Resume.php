@@ -24,12 +24,14 @@ class Resume
 	#이력서 게시판 뷰
 	public function show()
 	{
+		session_start();
+		$userID = $_SESSION['id'];
 		$no = $_GET['no'];
 		#해당 이력서의 정보를 가져옵니다 (해당 함수는 Resume모델에 존재)
 		$data = DB::resumeView($no);
+		$answer = DB::resumeConfirm($userID, $no);
 
-		if(empty($data)) {
-			session_start();
+		if(empty($data) || $answer['success'] == 0) {
 			$_SESSION['check'] = true;
 			return redirect('home');
 		}

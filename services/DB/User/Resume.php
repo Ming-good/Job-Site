@@ -99,6 +99,23 @@ trait Resume
                 $count = $stmt -> fetchColumn();
 		return $count;
 	}
+
+	public function resumeConfirm($userID, $id)
+        {
+                $db = DB::Connect();
+                $sql = 'SELECT EXISTS (SELECT * FROM apply WHERE (e_id=:e_id OR u_id=:u_id) AND resume_no=:resume_no) OR EXISTS (SELECT * FROM resume WHERE u_id=:ur_id AND order_id=:order_id) as success';
+                $stmt = $db -> prepare($sql);
+                $stmt -> bindValue(':e_id', $userID);
+                $stmt -> bindValue(':u_id', $userID);
+                $stmt -> bindValue(':resume_no', $id);
+                $stmt -> bindValue(':ur_id', $userID);
+                $stmt -> bindValue(':order_id', $id);
+                $stmt -> execute();
+                $answer = $stmt -> fetch();
+
+                return $answer;
+        }
+
 }
 
 

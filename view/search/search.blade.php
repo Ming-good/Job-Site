@@ -70,6 +70,13 @@
 		    <caption><h4><span style="color:#4876ef;">{{$keyword}}</span> 채용공고 정보</h4></caption>
 		</thead>
                 <tbody>
+		 @if(empty($data))
+		    <tr>
+			<td>
+			    <h1>검색결과가 없습니다.</h1>
+			</td>
+		    </tr>
+		 @else
                  @foreach($data as $row)
                     <tr>
                         <td>
@@ -117,8 +124,9 @@
                                 <p style="font-size:13px;color:#666;letter-spacing:-1.2px;">수정일 : {{$row['modify']}}</p>
                             </div>
                         </td>
-                    </tr>
+		    </tr>
 		    @endforeach
+		    @endif
                 </tbody>
             </table>
 
@@ -151,7 +159,7 @@
         {
                 var keyword = document.getElementById('inputKeyword2');
                 keyword.value = keyword.value.trim();
-                if(keyword.value.length<2) {
+                if(keyword.value.length<2 && keyword.value.length > 0) {
                         alert('키워드는 최소 2글자 이상으로 입력해주세요.');
                         return false;
                 }
