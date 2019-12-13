@@ -49,7 +49,7 @@ trait Search
         public function realTimeSearch()
         {
                 $db = DB::Connect();
-                $sql ="SELECT thisweek.rank,thisweek.keyword, IFNULL(thisweek.rank - prevweek.rank, 999) RANKING FROM (SELECT keyword,(@rank := @rank +1) AS rank FROM search AS a,(SELECT @rank := 0) AS b ORDER BY a.counts DESC LIMIT 0,9) AS thisweek LEFT OUTER JOIN (SELECT keyword, rank FROM weeksearch) AS prevweek ON thisweek.keyword = prevweek.keyword ORDER BY thisweek.rank;";
+                $sql ="SELECT thisweek.rank,thisweek.keyword, IFNULL(thisweek.rank - prevweek.rank, 999)  RANKING FROM (SELECT keyword,(@rank := @rank +1) AS rank FROM search AS a,(SELECT @rank := 0) AS b ORDER BY a.counts DESC LIMIT 0,9) AS thisweek LEFT OUTER JOIN (SELECT keyword, rank FROM weeksearch) AS prevweek ON thisweek.keyword = prevweek.keyword ORDER BY thisweek.rank;";
                 $stmt = $db -> prepare($sql);
                 $stmt -> execute();
 

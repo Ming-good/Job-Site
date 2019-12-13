@@ -7,59 +7,6 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="/Job-Site/assets/bootstrap/css/bootstrap.min.css"/>
 <script src="/Job-Site/assets/js/jquery-3.4.1.min.js"></script>
-
-</head>
-<link rel="shortcut icon" href="/Job-Site/assets/image/favicon.ico">
-<link rel="icon" href="/Job-Site/assets/image/favicon.ico">
-<body style="padding-top:30px;">
-
-<div class="container">
-    <div class="row" style="padding-bottom:30px;">
-        <div class="col-sm-12" style="margin-bottom:50px;">
-	    <div>
-		<div class="logo">
-                    <a href="/Job-Site/home"><img src="/Job-Site/assets/image/menuLogo.png" width="260" height="80"/></a>
-		</div>
-                <div class="search">
-                    <form action="allList" method='GET' onsubmit="return searchKey();">
-                        <input value='{{$keyword}}' autocomplete=off  type="search" class="searchForm" name="inputKeyword" id="inputKeyword"/>
-                        <input type="submit" class="btnA blue" value="검색"/>
-		    </form>
-		    <div class="liveSearch_Wrap" id="search_toggle">
-		    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="GNB">
-    <nav class="container">
-        <ul class="ulA">
-	    <li ><a href="/Job-Site/allList">채용공고</a></li>
-	</ul>
-	<button type="button" id="toggle" class="toggle" >OFF</button>
-    	<ul class="ulB"  style="list-style:none;">
-	@if($_SESSION['authority'] == 'u')
-            <li ><a id="resume"  href="/Job-Site/resume/management">이력서 관리</a></li>
-            <li ><a href="/Job-Site/scrap/list">스크랩</a></li>
-            <li ><a href="Auth/logout">로그아웃</a></li>
-	@elseif($_SESSION['authority'] == 'e')
-            <li ><a id="jobOpening" href="/Job-Site/list-g">채용공고 관리</a></li>
-            <li ><a href="/Job-Site/guin_management">인제정보 관리</a></li>
-            <li ><a href="Auth/logout">로그아웃</a></li>
-	@else
-            <li ><a id="resume"  href="/Job-Site/resume/management">이력서 관리</a></li>
-            <li ><a id="jobOpening" href="/Job-Site/list-g">채용공고 관리</a></li>
-            <li ><a id="login" href="login">로그인</a></li>
-	@endif
-    	</ul>
-    </nav>
-</div>
-
-
-@yield('home')
-</body>
-</html>
 <script>
         function searchKey()
         {
@@ -143,4 +90,57 @@
 
 	});
 </script>
+
+</head>
+<link rel="shortcut icon" href="/Job-Site/assets/image/favicon.ico">
+<link rel="icon" href="/Job-Site/assets/image/favicon.ico">
+<body style="padding-top:30px;">
+
+<div class="container">
+    <div class="row" style="padding-bottom:30px;">
+        <div class="col-sm-12" style="margin-bottom:50px;">
+	    <div>
+		<div class="logo">
+                    <a href="/Job-Site/home"><img src="/Job-Site/assets/image/menuLogo.png" width="260" height="80"/></a>
+		</div>
+                <div class="search">
+                    <form action="allList" method='GET' onsubmit="return searchKey();">
+                        <input value='{{$keyword}}' autocomplete=off  type="search" class="searchForm" name="inputKeyword" id="inputKeyword"/>
+                        <input type="submit" class="btnA blue" value="검색"/>
+		    </form>
+		    <div class="liveSearch_Wrap" id="search_toggle">
+		    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="GNB">
+    <nav class="container">
+        <ul class="ulA">
+	    <li ><a href="/Job-Site/allList">채용공고</a></li>
+	</ul>
+	<button type="button" id="toggle" class="toggle" >OFF</button>
+    	<ul class="ulB"  style="list-style:none;">
+	@if($_SESSION['authority'] == 'u')
+            <li ><a id="resume"  href="/Job-Site/resume/management">이력서 관리</a></li>
+            <li ><a href="/Job-Site/scrap/list">스크랩</a></li>
+            <li ><a href="Auth/logout">로그아웃</a></li>
+	@elseif($_SESSION['authority'] == 'e')
+            <li ><a id="jobOpening" href="/Job-Site/list-g">채용공고 관리</a></li>
+            <li ><a href="/Job-Site/guin_management">인제정보 관리</a></li>
+            <li ><a href="Auth/logout">로그아웃</a></li>
+	@else
+            <li ><a id="resume"  href="/Job-Site/resume/management">이력서 관리</a></li>
+            <li ><a id="jobOpening" href="/Job-Site/list-g">채용공고 관리</a></li>
+            <li ><a id="login" href="login">로그인</a></li>
+	@endif
+    	</ul>
+    </nav>
+</div>
+
+
+@yield('home')
+</body>
+</html>
 
