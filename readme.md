@@ -9,6 +9,8 @@
 - 모델 위치 : /services/DB/DBController.php
 - 뷰어 위치 : /view
 - 라우터 위치 : /services/Route/wep.php
+- 헬퍼 위치 : /vender/helper/helper.php
+- 유효성 검사 위치 : /services/lib/Validator.php
 
 # 주요기능
 
