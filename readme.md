@@ -10,15 +10,15 @@
 ###주요기능
 
 ##Main
--<img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/main.PNG?raw=true" width="300"></a>
+- <img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/main.PNG?raw=true" width="500" height="500">
 
 ##CRUD
--<img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/CRUD1.PNG?raw=true" width="300"></a>
--<img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/CRUD2.PNG?raw=true" width="300"></a>
--<img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/CRUD3.PNG?raw=true" width="300"></a>
+- <img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/CRUD1.PNG?raw=true" width="500" height="500">
+- <img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/CRUD2.PNG?raw=true" width="500" height="500">
+- <img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/CRUD3.PNG?raw=true" width="500" height="500">
 
 ##Live search
--<img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/live.PNG?raw=true" width="300"></a>
+- <img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/git/live.PNG?raw=true" width="500" height="500">
 
 
 
