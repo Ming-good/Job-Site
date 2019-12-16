@@ -1,4 +1,4 @@
-<p align="center"><a href="www.ming-web.shop/Job-Site/home"><img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/Ming_logo_blue.png?raw=true" width="400"></a></p>
+<p align="center"><a href="https://www.ming-web.shop/Job-Site/home"><img src="https://github.com/Ming-good/Job-Site/blob/master/assets/image/Ming_logo_blue.png?raw=true" width="400"></a></p>
 <br>
 
 # 소개
